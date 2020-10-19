@@ -43,6 +43,35 @@ class _HomeState extends State<Home> {
                   ],
                 )
               ],
+            ),
+            SizedBox(height: 5),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(color: white, boxShadow: [
+                  BoxShadow(
+                    color: grey[300],
+                    offset: Offset(1, 1),
+                    blurRadius: 4,
+                  ),
+                ]),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.search,
+                    color: red,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Find food or restaurants',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.filter_list,
+                    color: red,
+                  ),
+                ),
+              ),
             )
           ],
         ),
