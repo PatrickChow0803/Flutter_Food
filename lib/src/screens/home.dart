@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/src/widgets/custom_text.dart';
 import '../commons.dart';
 
 class Home extends StatefulWidget {
@@ -19,9 +20,9 @@ class _HomeState extends State<Home> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'What would you like to eat?',
-                    style: TextStyle(fontSize: 18.0),
+                  child: CustomText(
+                    text: 'What would you like to eat?',
+                    size: 18,
                   ),
                 ),
                 Stack(
