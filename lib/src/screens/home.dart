@@ -85,8 +85,9 @@ class _HomeState extends State<Home> {
                 colors: grey,
               ),
             ),
+            // Displays the featured foods
             Container(
-              height: 220,
+              height: 230,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 2,
@@ -94,7 +95,7 @@ class _HomeState extends State<Home> {
                     return Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Container(
-                          height: 150,
+                          height: 160,
                           width: 200,
                           decoration: BoxDecoration(color: white, boxShadow: [
                             BoxShadow(
@@ -105,11 +106,7 @@ class _HomeState extends State<Home> {
                           ]),
                           child: Column(
                             children: [
-                              Image.asset(
-                                'images/1.jpg',
-                                width: 140,
-                                height: 140,
-                              ),
+                              Image.asset('images/1.jpg', width: 140, height: 140),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -117,12 +114,52 @@ class _HomeState extends State<Home> {
                                       padding: EdgeInsets.all(8.0),
                                       child: CustomText(text: 'Some Food')),
                                   Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Icon(
-                                        Icons.favorite_border,
-                                        color: red,
-                                      )),
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                          color: white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: grey[300],
+                                              offset: Offset(1, 1),
+                                              blurRadius: 4,
+                                            ),
+                                          ]),
+                                      child: Padding(
+                                          padding: EdgeInsets.all(4.0),
+                                          child: Icon(
+                                            Icons.favorite_border,
+                                            color: red,
+                                          )),
+                                    ),
+                                  ),
                                 ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CustomText(text: "4.7", colors: grey, size: 14),
+                                        SizedBox(width: 4.0),
+                                        Icon(Icons.star, size: 18, color: red),
+                                        Icon(Icons.star, size: 18, color: red),
+                                        Icon(Icons.star, size: 18, color: red),
+                                        Icon(Icons.star, size: 18, color: red),
+                                        Icon(Icons.star, size: 18, color: grey),
+                                      ],
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 8.0),
+                                        child: CustomText(
+                                          text: "\$12.99",
+                                          weight: FontWeight.bold,
+                                        ))
+                                  ],
+                                ),
                               )
                             ],
                           )),
