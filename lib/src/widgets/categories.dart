@@ -5,10 +5,12 @@ import '../commons.dart';
 import 'custom_text.dart';
 
 List<Category> categoriesList = [
-  Category(
-    name: "Salad",
-    image: "salad.png",
-  ),
+  Category(name: "Salad", image: "salad.png"),
+  Category(name: "Steak", image: "steak.png"),
+  Category(name: "Fast Food", image: "sandwich.png"),
+  Category(name: "Desserts", image: "ice-cream.png"),
+  Category(name: "Seafood", image: "fish.png"),
+  Category(name: "Beer", image: "pint.png"),
 ];
 
 class Categories extends StatelessWidget {
