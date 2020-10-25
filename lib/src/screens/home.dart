@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
+import 'package:flutter_food/src/widgets/featured_products.dart';
 import '../commons.dart';
 
 class Home extends StatefulWidget {
@@ -86,6 +87,27 @@ class _HomeState extends State<Home> {
               ),
             ),
             // Displays the featured foods
+            Featured()
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        color: white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image.asset('images/home.png', width: 26, height: 26)),
+            Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image.asset('images/target.png', width: 26, height: 26)),
+            Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image.asset('images/shopping-bag.png', width: 26, height: 26)),
+            Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image.asset('images/home.png', width: 26, height: 26)),
           ],
         ),
       ),
