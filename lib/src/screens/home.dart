@@ -77,6 +77,58 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(height: 5.0),
             Categories(),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CustomText(
+                text: "Featured Food",
+                size: 20.0,
+                colors: grey,
+              ),
+            ),
+            Container(
+              height: 220,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 2,
+                  itemBuilder: (_, index) {
+                    return Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
+                          height: 150,
+                          width: 200,
+                          decoration: BoxDecoration(color: white, boxShadow: [
+                            BoxShadow(
+                              color: grey[300],
+                              offset: Offset(1, 1),
+                              blurRadius: 4,
+                            ),
+                          ]),
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'images/1.jpg',
+                                width: 140,
+                                height: 140,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: CustomText(text: 'Some Food')),
+                                  Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Icon(
+                                        Icons.favorite_border,
+                                        color: red,
+                                      )),
+                                ],
+                              )
+                            ],
+                          )),
+                    );
+                  }),
+            )
           ],
         ),
       ),
