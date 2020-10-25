@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import '../commons.dart';
 
@@ -75,46 +76,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(height: 5.0),
-            Container(
-              height: 120,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 8,
-                itemBuilder: (_, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: red[50],
-                                offset: Offset(4, 6),
-                                blurRadius: 12,
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                              padding: EdgeInsets.all(6.0),
-                              child: Image.asset(
-                                'images/salad.png',
-                                width: 50,
-                              )),
-                        ),
-                        SizedBox(height: 10),
-                        CustomText(
-                          text: 'Salad',
-                          size: 14,
-                          colors: black,
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
-            )
+            Categories(),
           ],
         ),
       ),
