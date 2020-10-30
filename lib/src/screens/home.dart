@@ -87,7 +87,53 @@ class _HomeState extends State<Home> {
               ),
             ),
             // Displays the featured foods
-            Featured()
+            Featured(),
+
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CustomText(text: "Popular", size: 20.0, colors: grey),
+            ),
+
+            Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.asset('images/food.jpg')),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.favorite,
+                          color: red,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Container(
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                            child: Row(
+                              children: [
+                                Padding(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Icon(Icons.star, color: Colors.yellow[900], size: 20.0)),
+                                Text("4.5"),
+                              ],
+                            )),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),
