@@ -153,7 +153,7 @@ class _HomeState extends State<Home> {
                 child: Image.asset('images/shopping-bag.png', width: 26, height: 26)),
             Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Image.asset('images/home.png', width: 26, height: 26)),
+                child: Image.asset('images/home.png', width: 26, height: 26),),
           ],
         ),
       ),
