@@ -137,6 +137,7 @@ class _HomeState extends State<Home> {
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       height: 100,
+                      //test
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20)),
                           gradient: LinearGradient(
