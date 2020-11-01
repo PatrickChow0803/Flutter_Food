@@ -115,7 +115,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(20.0),
                         child: Container(
                             width: 50,
                             decoration: BoxDecoration(
@@ -132,12 +132,13 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
+                // Positioned.fill occupies all of the space within the stack
+                // it is used to be more easy to place widgets
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       height: 100,
-                      //test
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20)),
                           gradient: LinearGradient(
@@ -153,6 +154,40 @@ class _HomeState extends State<Home> {
                                 Colors.black.withOpacity(.05),
                                 Colors.black.withOpacity(.025),
                               ])),
+                    ),
+                  ),
+                ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(12, 8, 8, 8),
+                          child: RichText(
+                            text: TextSpan(children: [
+                              TextSpan(
+                                  text: "Pancakes \n",
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text: "by: ",
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+                              TextSpan(
+                                  text: "Pizza Hut \n",
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+                            ]),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: CustomText(
+                            text: "\$12.99",
+                            colors: Colors.white,
+                            size: 25.0,
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 )
