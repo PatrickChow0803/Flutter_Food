@@ -131,6 +131,29 @@ class _HomeState extends State<Home> {
                       )
                     ],
                   ),
+                ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20)),
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                Colors.black.withOpacity(.8),
+                                Colors.black.withOpacity(.7),
+                                Colors.black.withOpacity(.6),
+                                Colors.black.withOpacity(.6),
+                                Colors.black.withOpacity(.4),
+                                Colors.black.withOpacity(.1),
+                                Colors.black.withOpacity(.05),
+                                Colors.black.withOpacity(.025),
+                              ])),
+                    ),
+                  ),
                 )
               ],
             ),
@@ -152,8 +175,9 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.all(8.0),
                 child: Image.asset('images/shopping-bag.png', width: 26, height: 26)),
             Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Image.asset('images/home.png', width: 26, height: 26),),
+              padding: EdgeInsets.all(8.0),
+              child: Image.asset('images/home.png', width: 26, height: 26),
+            ),
           ],
         ),
       ),
