@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:flutter_food/src/widgets/featured_products.dart';
@@ -199,21 +200,11 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: Container(
         color: white,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Image.asset('images/home.png', width: 26, height: 26)),
-            Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Image.asset('images/target.png', width: 26, height: 26)),
-            Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Image.asset('images/shopping-bag.png', width: 26, height: 26)),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Image.asset('images/home.png', width: 26, height: 26),
-            ),
+            BottomNavIcon(image: 'home.png'),
+            BottomNavIcon(image: 'shopping-bag.png'),
+            BottomNavIcon(image: 'avatar.png'),
           ],
         ),
       ),
