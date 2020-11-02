@@ -3,7 +3,7 @@ import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:flutter_food/src/widgets/featured_products.dart';
-import '../commons.dart';
+import '../helpers/style.dart';
 
 class Home extends StatefulWidget {
   @override
