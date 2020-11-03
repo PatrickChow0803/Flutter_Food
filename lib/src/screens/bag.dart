@@ -80,7 +80,34 @@ class _ShoppingBagState extends State<ShoppingBag> {
                   blurRadius: 30,
                 )
               ]),
-              child: Text('Testing'),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    'images/' + product.image,
+                    fit: BoxFit.cover,
+                  ),
+                  // Use RichText for multiple lines of text
+                  Padding(
+                    padding: EdgeInsets.only(right: 125),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: product.name + '\n',
+                            style: TextStyle(color: black, fontSize: 20),
+                          ),
+                          TextSpan(
+                            text: '\$' + product.price.toString(),
+                            style: TextStyle(color: black, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  IconButton(icon: Icon(Icons.delete), onPressed: () {})
+                ],
+              ),
             ),
           )
         ],
