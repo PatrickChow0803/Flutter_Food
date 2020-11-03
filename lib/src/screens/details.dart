@@ -2,6 +2,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/style.dart';
 import 'package:flutter_food/src/models/product.dart';
+import 'package:flutter_food/src/widgets/custom_text.dart';
 
 class Details extends StatefulWidget {
   final Product product;
@@ -45,16 +46,62 @@ class _DetailsState extends State<Details> {
                           Navigator.of(context).pop();
                         },
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Image.asset(
-                          'images/shopping-bag.png',
-                          width: 30,
-                          height: 30,
-                        ),
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              'images/shopping-bag.png',
+                              width: 30,
+                              height: 30,
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 7,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(blurRadius: 3, color: Colors.grey, spreadRadius: 1)
+                                ],
+                              ),
+                              child: CircleAvatar(
+                                radius: 10,
+                                child: CustomText(
+                                  text: '2',
+                                  colors: white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+                  Positioned(
+                    bottom: 65,
+                    right: 13,
+                    child: Container(
+                      decoration: BoxDecoration(
+//                        shape: BoxShape.circle,
+                        color: white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: grey[400],
+                            offset: Offset(2, 3),
+                            blurRadius: 3,
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.favorite,
+                        color: red,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
