@@ -22,16 +22,40 @@ class _DetailsState extends State<Details> {
           SafeArea(
             child: Container(
               height: 300,
-              child: Carousel(
-                images: [
-                  Image.asset('images/${widget.product.image}'),
-                  Image.asset('images/${widget.product.image}'),
-                  Image.asset('images/${widget.product.image}'),
+              child: Stack(
+                children: [
+                  Carousel(
+                    images: [
+                      Image.asset('images/${widget.product.image}'),
+                      Image.asset('images/${widget.product.image}'),
+                      Image.asset('images/${widget.product.image}'),
+                    ],
+                    dotBgColor: white,
+                    dotColor: grey,
+                    dotIncreasedColor: red,
+                    dotIncreaseSize: 1.2,
+                    autoplay: false,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.keyboard_backspace),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'images/shopping-bag.png',
+                          width: 30,
+                          height: 30,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
-                dotBgColor: white,
-                dotColor: grey,
-                dotIncreasedColor: red,
-                dotIncreaseSize: 1.2,
               ),
             ),
           )
