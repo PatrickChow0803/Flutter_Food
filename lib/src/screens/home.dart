@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/src/helpers/screen_navigation.dart';
 import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:flutter_food/src/widgets/featured_products.dart';
 import '../helpers/style.dart';
+import 'bag.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -203,7 +205,12 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BottomNavIcon(image: 'home.png'),
-            BottomNavIcon(image: 'shopping-bag.png'),
+            BottomNavIcon(
+              image: 'shopping-bag.png',
+              onTap: () {
+                changeScreen(context, ShoppingBag());
+              },
+            ),
             BottomNavIcon(image: 'avatar.png'),
           ],
         ),

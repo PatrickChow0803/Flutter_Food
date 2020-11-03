@@ -105,6 +105,33 @@ class _DetailsState extends State<Details> {
                 ],
               ),
             ),
+          ),
+          CustomText(text: widget.product.name, size: 20, weight: FontWeight.bold),
+          CustomText(
+            text: '\$' + widget.product.price.toString(),
+            size: 16,
+            weight: FontWeight.w400,
+            colors: red,
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(icon: Icon(Icons.remove, size: 36), onPressed: () {}),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: red,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
+                    child: CustomText(text: 'Add To Bag', colors: white, size: 20),
+                  ),
+                ),
+              ),
+              IconButton(icon: Icon(Icons.add, size: 36, color: red), onPressed: () {}),
+            ],
           )
         ],
       ),
