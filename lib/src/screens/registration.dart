@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/screen_navigation.dart';
 import 'package:flutter_food/src/helpers/style.dart';
-import 'package:flutter_food/src/screens/registration.dart';
+import 'package:flutter_food/src/screens/login.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 
-class LoginScreen extends StatefulWidget {
+class Registration extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegistrationState createState() => _RegistrationState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +19,25 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 50),
           Image.asset(
             'images/lg.png',
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: grey),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Username',
+                    border: InputBorder.none,
+                    icon: Icon(Icons.person),
+                  ),
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -72,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
-                      text: 'Login',
+                      text: 'Register',
                       size: 24,
                       colors: white,
                     ),
@@ -84,10 +103,10 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 20),
           GestureDetector(
             onTap: () {
-              changeScreen(context, Registration());
+              changeScreen(context, LoginScreen());
             },
             child: CustomText(
-              text: 'Register Here',
+              text: 'Login Here',
               size: 16,
             ),
           )
