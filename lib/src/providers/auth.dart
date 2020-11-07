@@ -35,11 +35,36 @@ class AuthProvider with ChangeNotifier {
       await _auth.signInWithEmailAndPassword(email: email.text, password: password.text);
       return true;
     } catch (e) {
-      _status = Status.Unauthenticated;
-      notifyListeners();
-      print("error: " + e.toString());
-      return false;
+      return _onError(e.toString());
     }
+  }
+
+  Future<bool> signUp() async {
+    try {
+      _status = Status.Authenticating;
+      notifyListeners();
+      await _auth.createUserWithEmailAndPassword(email: email.text, password: password.text)
+          // UserCredentials is given back from .createUserWithEmailAndPassword
+          .then((userCredentials) {
+        Map<String, dynamic> values = {
+          'name': name.text,
+          'email': email.text,
+          'id': userCredentials.user.uid,
+        };
+        // Adds the user to fire store
+        _userServices.createUser(values);
+      });
+      return true;
+    } catch (e) {
+      return _onError(e.toString());
+    }
+  }
+
+  bool _onError(String error) {
+    _status = Status.Unauthenticated;
+    notifyListeners();
+    print('error:' + error.toString());
+    return false;
   }
 
   Future<void> _onStateChanged(Firebase.User firebaseUser) async {
