@@ -16,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // key is used to check the state of the scaffold widget
+  // This is used to show a snackbar for a failed login
   final _key = GlobalKey<ScaffoldState>();
 
   @override
