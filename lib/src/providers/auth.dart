@@ -22,6 +22,7 @@ class AuthProvider with ChangeNotifier {
   TextEditingController password = TextEditingController();
 
   Status get status => _status;
+  UserModel get userModel => _userModel;
   Firebase.User get user => _user;
 
   AuthProvider.initialize() : _auth = Firebase.FirebaseAuth.instance {
@@ -60,11 +61,11 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  bool _onError(String error) {
+  void signOut() {
+    _auth.signOut();
     _status = Status.Unauthenticated;
     notifyListeners();
-    print('error:' + error.toString());
-    return false;
+    cleanControllers();
   }
 
   Future<void> _onStateChanged(Firebase.User firebaseUser) async {
@@ -77,5 +78,20 @@ class AuthProvider with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  // General methods
+
+  bool _onError(String error) {
+    _status = Status.Unauthenticated;
+    notifyListeners();
+    print('error:' + error.toString());
+    return false;
+  }
+
+  void cleanControllers() {
+    email.clear();
+    password.clear();
+    name.clear();
   }
 }
