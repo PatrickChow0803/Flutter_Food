@@ -28,6 +28,20 @@ class AuthProvider with ChangeNotifier {
     _auth.authStateChanges().listen(_onStateChanged);
   }
 
+  Future<bool> signIn() async {
+    try {
+      _status = Status.Authenticating;
+      notifyListeners();
+      await _auth.signInWithEmailAndPassword(email: email.text, password: password.text);
+      return true;
+    } catch (e) {
+      _status = Status.Unauthenticated;
+      notifyListeners();
+      print("error: " + e.toString());
+      return false;
+    }
+  }
+
   Future<void> _onStateChanged(Firebase.User firebaseUser) async {
     if (firebaseUser == null) {
       _status = Status.Uninitialized;
