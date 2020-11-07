@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_food/src/models/user.dart';
 
+// THIS FILE IS USED TO UPDATE DATA WITHIN FIRESTORE
+
 class UserServices {
   String collection = 'users';
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
