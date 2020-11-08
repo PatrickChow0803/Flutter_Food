@@ -27,101 +27,103 @@ class _LoginScreenState extends State<LoginScreen> {
         ? Loading()
         : Scaffold(
             key: _key,
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 50),
-                Image.asset(
-                  'images/lg.png',
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: grey),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: TextFormField(
-                        controller: authProvider.email,
-                        decoration: InputDecoration(
-                          hintText: 'Email',
-                          border: InputBorder.none,
-                          icon: Icon(Icons.email),
-                        ),
-                      ),
-                    ),
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 50),
+                  Image.asset(
+                    'images/lg.png',
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: grey),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: TextFormField(
-                        controller: authProvider.password,
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          border: InputBorder.none,
-                          icon: Icon(Icons.lock),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: GestureDetector(
-                    onTap: () async {
-                      // If signIn() is NOT true, prevent the button from working.
-                      // Remember that signIn() returns a bool value
-                      // await is needed to use signIn()
-                      if (!await authProvider.signIn()) {
-                        _key.currentState.showSnackBar(SnackBar(content: Text('Login Failed')));
-                        return;
-                      }
-                      // If login is successful, continue to the next screen
-                      authProvider.cleanControllers();
-                      changeScreenReplacement(context, Home());
-                    },
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: red,
                         border: Border.all(color: grey),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomText(
-                              text: 'Login',
-                              size: 24,
-                              colors: white,
-                            ),
-                          ],
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: TextFormField(
+                          controller: authProvider.email,
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            border: InputBorder.none,
+                            icon: Icon(Icons.email),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {
-                    changeScreen(context, Registration());
-                  },
-                  child: CustomText(
-                    text: 'Register Here',
-                    size: 16,
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: grey),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: TextFormField(
+                          controller: authProvider.password,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            border: InputBorder.none,
+                            icon: Icon(Icons.lock),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: GestureDetector(
+                      onTap: () async {
+                        // If signIn() is NOT true, prevent the button from working.
+                        // Remember that signIn() returns a bool value
+                        // await is needed to use signIn()
+                        if (!await authProvider.signIn()) {
+                          _key.currentState.showSnackBar(SnackBar(content: Text('Login Failed')));
+                          return;
+                        }
+                        // If login is successful, continue to the next screen
+                        authProvider.cleanControllers();
+                        changeScreenReplacement(context, Home());
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: red,
+                          border: Border.all(color: grey),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomText(
+                                text: 'Login',
+                                size: 24,
+                                colors: white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      changeScreen(context, Registration());
+                    },
+                    child: CustomText(
+                      text: 'Register Here',
+                      size: 16,
+                    ),
+                  )
+                ],
+              ),
             ),
           );
   }

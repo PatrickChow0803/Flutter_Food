@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/providers/auth.dart';
 import 'package:flutter_food/src/screens/home.dart';
@@ -5,9 +6,10 @@ import 'package:flutter_food/src/screens/login.dart';
 import 'package:flutter_food/src/widgets/loading.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   // Just for safety reasons.
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -38,7 +40,7 @@ class ScreensController extends StatelessWidget {
     final auth = Provider.of<AuthProvider>(context);
     switch (auth.status) {
       case Status.Uninitialized:
-        return Loading();
+        return LoginScreen();
       case Status.Unauthenticated:
       case Status.Authenticating:
         return LoginScreen();
