@@ -19,40 +19,41 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: black),
+        elevation: 0.5,
+        backgroundColor: white,
+        title: CustomText(
+          text: 'Food App',
+          size: 18,
+          weight: FontWeight.bold,
+        ),
+        actions: [
+          Stack(
+            children: [
+              // moves the container(red dot) within the stack widget
+              Positioned(
+                top: 12.0,
+                right: 12.0,
+                child: Container(
+                  width: 10.0,
+                  height: 10.0,
+                  decoration: BoxDecoration(
+                    color: red,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+              ),
+              IconButton(icon: Icon(Icons.notifications_none), onPressed: () {})
+            ],
+          )
+        ],
+      ),
+      drawer: Drawer(),
       backgroundColor: white,
       body: SafeArea(
         child: ListView(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomText(
-                    text: 'What would you like to eat?',
-                    size: 18,
-                  ),
-                ),
-                Stack(
-                  children: [
-                    // moves the container(red dot) within the stack widget
-                    Positioned(
-                      top: 12.0,
-                      right: 12.0,
-                      child: Container(
-                        width: 10.0,
-                        height: 10.0,
-                        decoration: BoxDecoration(
-                          color: red,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                    ),
-                    IconButton(icon: Icon(Icons.notifications_none), onPressed: () {})
-                  ],
-                )
-              ],
-            ),
             SizedBox(height: 5),
             Padding(
               padding: EdgeInsets.all(8.0),
