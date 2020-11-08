@@ -20,12 +20,13 @@ class _HomeState extends State<Home> {
     final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: black),
-        elevation: 0.5,
-        backgroundColor: white,
+        iconTheme: IconThemeData(color: white),
+        elevation: 0.0,
+        backgroundColor: Theme.of(context).primaryColor,
         title: CustomText(
           text: 'Food App',
           size: 18,
+          colors: white,
           weight: FontWeight.bold,
         ),
         actions: [
@@ -39,7 +40,29 @@ class _HomeState extends State<Home> {
                   width: 10.0,
                   height: 10.0,
                   decoration: BoxDecoration(
-                    color: red,
+                    color: white,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+              ),
+              IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  onPressed: () {
+                    changeScreen(context, ShoppingBag());
+                  })
+            ],
+          ),
+          Stack(
+            children: [
+              // moves the container(red dot) within the stack widget
+              Positioned(
+                top: 12.0,
+                right: 12.0,
+                child: Container(
+                  width: 10.0,
+                  height: 10.0,
+                  decoration: BoxDecoration(
+                    color: white,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
@@ -49,36 +72,87 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          UserAccountsDrawerHeader(
+            accountName: CustomText(
+              text: authProvider.userModel.name,
+              colors: white,
+            ),
+            accountEmail: Opacity(
+              opacity: 0.8,
+              child: CustomText(
+                text: authProvider.userModel.email,
+                colors: white,
+              ),
+            ),
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+          ),
+          ListTile(
+            title: CustomText(
+              text: "Home",
+            ),
+            leading: Icon(Icons.home),
+            onTap: () {},
+          ),
+          ListTile(
+            title: CustomText(
+              text: "Account",
+            ),
+            leading: Icon(Icons.person),
+            onTap: () {},
+          ),
+          ListTile(
+            title: CustomText(
+              text: "Cart",
+            ),
+            leading: Icon(Icons.shopping_cart),
+            onTap: () {
+              changeScreen(context, ShoppingBag());
+            },
+          ),
+        ],
+      )),
       backgroundColor: white,
       body: SafeArea(
         child: ListView(
           children: [
-            SizedBox(height: 5),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(color: white, boxShadow: [
-                  BoxShadow(
-                    color: grey[300],
-                    offset: Offset(1, 1),
-                    blurRadius: 4,
-                  ),
-                ]),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.search,
-                    color: red,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Find food or restaurants',
-                      border: InputBorder.none,
+            Container(
+              decoration: (BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(16.0),
+                    bottomRight: Radius.circular(16.0),
+                  ))),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(18.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: grey[400],
+                          offset: Offset(1, 1),
+                          blurRadius: 4,
+                        ),
+                      ]),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.search,
+                      color: Theme.of(context).primaryColor,
                     ),
-                  ),
-                  trailing: Icon(
-                    Icons.filter_list,
-                    color: red,
+                    title: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Find food or restaurants',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.filter_list,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
               ),
@@ -147,20 +221,21 @@ class _HomeState extends State<Home> {
                     child: Container(
                       height: 100,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20)),
+//                          borderRadius: BorderRadius.only(
+//                              bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
                           gradient: LinearGradient(
                               begin: Alignment.bottomCenter,
                               end: Alignment.topCenter,
                               colors: [
-                                Colors.black.withOpacity(.8),
-                                Colors.black.withOpacity(.7),
-                                Colors.black.withOpacity(.6),
-                                Colors.black.withOpacity(.6),
-                                Colors.black.withOpacity(.4),
-                                Colors.black.withOpacity(.1),
-                                Colors.black.withOpacity(.05),
-                                Colors.black.withOpacity(.025),
-                              ])),
+                            Colors.black.withOpacity(.8),
+                            Colors.black.withOpacity(.7),
+                            Colors.black.withOpacity(.6),
+                            Colors.black.withOpacity(.6),
+                            Colors.black.withOpacity(.4),
+                            Colors.black.withOpacity(.1),
+                            Colors.black.withOpacity(.05),
+                            Colors.black.withOpacity(.025),
+                          ])),
                     ),
                   ),
                 ),
@@ -203,27 +278,28 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        color: white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            BottomNavIcon(image: 'home.png'),
-            BottomNavIcon(
-              image: 'shopping-bag.png',
-              onTap: () {
-                changeScreen(context, ShoppingBag());
-              },
-            ),
-            BottomNavIcon(
-              image: 'avatar.png',
-              onTap: () {
-                authProvider.signOut();
-              },
-            ),
-          ],
-        ),
-      ),
+//      BOTTOM NAVIGATION BAR'S FUNCTIONALITY HAS BEEN MOVED TO THE DRAWER
+//      bottomNavigationBar: Container(
+//        color: white,
+//        child: Row(
+//          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//          children: [
+//            BottomNavIcon(image: 'home.png'),
+//            BottomNavIcon(
+//              image: 'shopping-bag.png',
+//              onTap: () {
+//                changeScreen(context, ShoppingBag());
+//              },
+//            ),
+//            BottomNavIcon(
+//              image: 'avatar.png',
+//              onTap: () {
+//                authProvider.signOut();
+//              },
+//            ),
+//          ],
+//        ),
+//      ),
     );
   }
 }
