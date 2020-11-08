@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/screen_navigation.dart';
+import 'package:flutter_food/src/providers/auth.dart';
 import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:flutter_food/src/widgets/featured_products.dart';
+import 'package:provider/provider.dart';
 import '../helpers/style.dart';
 import 'bag.dart';
 
@@ -15,6 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: white,
       body: SafeArea(
@@ -211,7 +214,12 @@ class _HomeState extends State<Home> {
                 changeScreen(context, ShoppingBag());
               },
             ),
-            BottomNavIcon(image: 'avatar.png'),
+            BottomNavIcon(
+              image: 'avatar.png',
+              onTap: () {
+                authProvider.signOut();
+              },
+            ),
           ],
         ),
       ),
