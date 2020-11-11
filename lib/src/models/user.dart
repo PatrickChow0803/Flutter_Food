@@ -22,6 +22,8 @@ class UserModel {
   List get likedFood => _likedFood;
   List get likedRestaurants => _likedRestaurants;
 
+  // .fromSnapshot can be anything I want. I'm naming it this because that's the data from firebase
+
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
     _name = snapshot.data()[NAME];
     _email = snapshot.data()[EMAIL];
