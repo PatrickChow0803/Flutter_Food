@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  // THESE ARE USED TO REPRESENT THE NAME OF THE FIELD IN FIRESTORE
+  // THESE STATIC CONST VARIABLES ARE USED TO REPRESENT THE NAME OF THE FIELD IN FIRESTORE
   // NOT THE DATA
   static const NAME = 'name';
   static const EMAIL = 'email';
