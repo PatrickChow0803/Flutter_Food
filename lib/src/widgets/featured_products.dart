@@ -6,32 +6,7 @@ import 'package:flutter_food/src/screens/details.dart';
 import '../helpers/style.dart';
 import 'custom_text.dart';
 
-List<Product> productsList = [
-  Product(
-    name: 'Cereal',
-    price: 5.99,
-    rating: 4.2,
-    vendor: "GoodFoos",
-    wishList: true,
-    image: "1.jpg",
-  ),
-  Product(
-    name: 'Tacos',
-    price: 12.99,
-    rating: 4.7,
-    vendor: "GoodFoos",
-    wishList: false,
-    image: "5.jpg",
-  ),
-  Product(
-    name: 'Cereal',
-    price: 5.99,
-    rating: 4.2,
-    vendor: "GoodFoos",
-    wishList: true,
-    image: "1.jpg",
-  ),
-];
+List<ProductModel> productsList = [];
 
 class Featured extends StatelessWidget {
   @override
@@ -81,17 +56,17 @@ class Featured extends StatelessWidget {
                                         blurRadius: 4,
                                       ),
                                     ]),
-                                child: Padding(
-                                    padding: EdgeInsets.all(4.0),
-                                    child: productsList[index].wishList
-                                        ? Icon(
-                                            Icons.favorite,
-                                            color: red,
-                                          )
-                                        : Icon(
-                                            Icons.favorite_border,
-                                            color: red,
-                                          )),
+//                                child: Padding(
+//                                    padding: EdgeInsets.all(4.0),
+//                                    child: productsList[index].wishList
+//                                        ? Icon(
+//                                            Icons.favorite,
+//                                            color: red,
+//                                          )
+//                                        : Icon(
+//                                            Icons.favorite_border,
+//                                            color: red,
+//                                          )),
                               ),
                             ),
                           ],

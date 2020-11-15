@@ -9,15 +9,6 @@ class ShoppingBag extends StatefulWidget {
 }
 
 class _ShoppingBagState extends State<ShoppingBag> {
-  Product product = Product(
-    name: 'Cereal',
-    price: 5.99,
-    rating: 4.2,
-    vendor: "GoodFoos",
-    wishList: true,
-    image: "1.jpg",
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,51 +58,51 @@ class _ShoppingBagState extends State<ShoppingBag> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              height: 120,
-              decoration: BoxDecoration(color: white, boxShadow: [
-                BoxShadow(
-                  color: red[50],
-                  offset: Offset(3, 5),
-                  blurRadius: 30,
-                )
-              ]),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset(
-                    'images/' + product.image,
-                    fit: BoxFit.cover,
-                  ),
-                  // Use RichText for multiple lines of text
-                  Padding(
-                    padding: EdgeInsets.only(right: 125),
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: product.name + '\n',
-                            style: TextStyle(color: black, fontSize: 20),
-                          ),
-                          TextSpan(
-                            text: '\$' + product.price.toString(),
-                            style: TextStyle(color: black, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  IconButton(icon: Icon(Icons.delete), onPressed: () {})
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
+//      body: ListView(
+//        children: [
+//          Padding(
+//            padding: const EdgeInsets.all(16.0),
+//            child: Container(
+//              height: 120,
+//              decoration: BoxDecoration(color: white, boxShadow: [
+//                BoxShadow(
+//                  color: red[50],
+//                  offset: Offset(3, 5),
+//                  blurRadius: 30,
+//                )
+//              ]),
+//              child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                children: [
+//                  Image.asset(
+//                    'images/' + product.image,
+//                    fit: BoxFit.cover,
+//                  ),
+//                  // Use RichText for multiple lines of text
+//                  Padding(
+//                    padding: EdgeInsets.only(right: 125),
+//                    child: RichText(
+//                      text: TextSpan(
+//                        children: [
+//                          TextSpan(
+//                            text: product.name + '\n',
+//                            style: TextStyle(color: black, fontSize: 20),
+//                          ),
+//                          TextSpan(
+//                            text: '\$' + product.price.toString(),
+//                            style: TextStyle(color: black, fontSize: 16),
+//                          ),
+//                        ],
+//                      ),
+//                    ),
+//                  ),
+//                  IconButton(icon: Icon(Icons.delete), onPressed: () {})
+//                ],
+//              ),
+//            ),
+//          )
+//        ],
+//      ),
     );
   }
 }

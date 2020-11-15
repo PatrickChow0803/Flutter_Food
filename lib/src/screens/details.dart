@@ -5,7 +5,7 @@ import 'package:flutter_food/src/models/product.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 
 class Details extends StatefulWidget {
-  final Product product;
+  final ProductModel product;
 
   Details({@required this.product});
 
