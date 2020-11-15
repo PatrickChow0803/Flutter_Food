@@ -56,6 +56,8 @@ class AuthProvider with ChangeNotifier {
           'name': name.text,
           'email': email.text,
           'id': userCredentials.user.uid,
+          'likedFood': [],
+          'likedRestaurants': [],
         };
         // Adds the user to fire store
         _userServices.createUser(values);
