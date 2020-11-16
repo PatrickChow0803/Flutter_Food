@@ -10,7 +10,7 @@ enum Status {
   Authenticated,
 }
 
-class AuthProvider with ChangeNotifier {
+class UserProvider with ChangeNotifier {
   Firebase.FirebaseAuth _auth;
   Firebase.User _user;
   Status _status = Status.Uninitialized;
@@ -28,7 +28,7 @@ class AuthProvider with ChangeNotifier {
   // When we create this provider class, call this named constructor called initialize
   // So when authenication changes, the auth state is going to change. We want to listen to that
   // When this change occurs, I want to do something on my app to reflect the user state change in Firebase
-  AuthProvider.initialize() : _auth = Firebase.FirebaseAuth.instance {
+  UserProvider.initialize() : _auth = Firebase.FirebaseAuth.instance {
     _auth.authStateChanges().listen(_onStateChanged);
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/screen_navigation.dart';
-import 'package:flutter_food/src/providers/auth.dart';
+import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: white),
