@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/category.dart';
 
 class CategoryServices {
+  // Should match letter by letter the document name in Firestore
   String collection = 'categories';
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
