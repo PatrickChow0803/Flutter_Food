@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/providers/category.dart';
+import 'package:flutter_food/src/providers/restaurant.dart';
 import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/screens/home.dart';
 import 'package:flutter_food/src/screens/login.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: UserProvider.initialize()),
         ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
+        ChangeNotifierProvider.value(value: RestaurantProvider.initialize()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
