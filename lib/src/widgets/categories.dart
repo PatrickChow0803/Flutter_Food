@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/models/category.dart';
+import 'package:flutter_food/src/widgets/loading.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../helpers/style.dart';
 import 'custom_text.dart';
@@ -20,9 +22,25 @@ class CategoryWidget extends StatelessWidget {
             height: 160,
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: Image.network(
-                  category.image,
-                  fit: BoxFit.fill,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                        child: Align(
+                      alignment: Alignment.center,
+                      child: Loading(),
+                    )),
+                    Center(
+                      child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: category.image,
+                        fit: BoxFit.fill,
+                        // Have to make the width and height match the container in order for the
+                        // fit to work properly
+                        width: 140,
+                        height: 160,
+                      ),
+                    ),
+                  ],
                 )),
           ),
           Container(
