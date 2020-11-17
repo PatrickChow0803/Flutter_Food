@@ -167,60 +167,14 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(height: 5.0),
-            // REPLACE THIS CONTAINER WIDGET WITH CATEGORIES() TO GET THE OLD DESIGN
             Container(
               height: 100,
               child: ListView.builder(
                 itemCount: categoryProvider.categories.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (ctx, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          width: 140,
-                          height: 160,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: Image.network(
-                                categoryProvider.categories[index].image,
-                                fit: BoxFit.fill,
-                              )),
-                        ),
-                        Container(
-                          width: 140,
-                          height: 160,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(30),
-                                bottomRight: Radius.circular(30),
-                              ),
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                colors: [
-                                  Colors.black.withOpacity(0.6),
-                                  Colors.black.withOpacity(0.6),
-                                  Colors.black.withOpacity(0.6),
-                                  Colors.black.withOpacity(0.4),
-                                  Colors.black.withOpacity(0.1),
-                                  Colors.black.withOpacity(0.05),
-                                  Colors.black.withOpacity(0.025),
-                                ],
-                              )),
-                        ),
-                        Positioned.fill(
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: CustomText(
-                                  text: categoryProvider.categories[index].name,
-                                  colors: white,
-                                  size: 26,
-                                  weight: FontWeight.w300,
-                                )))
-                      ],
-                    ),
+                itemBuilder: (_, index) {
+                  return CategoryWidget(
+                    category: categoryProvider.categories[index],
                   );
                 },
               ),

@@ -4,49 +4,58 @@ import 'package:flutter_food/src/models/category.dart';
 import '../helpers/style.dart';
 import 'custom_text.dart';
 
-List<CategoryModel> categoriesList = [];
+class CategoryWidget extends StatelessWidget {
+  final CategoryModel category;
 
-class Categories extends StatelessWidget {
+  CategoryWidget({this.category});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 105,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categoriesList.length,
-        itemBuilder: (_, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: red[50],
-                        offset: Offset(4, 6),
-                        blurRadius: 12,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                      padding: EdgeInsets.all(6.0),
-                      child: Image.asset(
-                        'images/${categoriesList[index].image}',
-                        width: 50,
-                      )),
+    return Padding(
+      padding: const EdgeInsets.all(6),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            width: 140,
+            height: 160,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image.network(
+                  category.image,
+                  fit: BoxFit.fill,
+                )),
+          ),
+          Container(
+            width: 140,
+            height: 160,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
-                SizedBox(height: 10),
-                CustomText(
-                  text: categoriesList[index].name,
-                  size: 14,
-                  colors: black,
-                )
-              ],
-            ),
-          );
-        },
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.1),
+                    Colors.black.withOpacity(0.05),
+                    Colors.black.withOpacity(0.025),
+                  ],
+                )),
+          ),
+          Positioned.fill(
+              child: Align(
+                  alignment: Alignment.center,
+                  child: CustomText(
+                    text: category.name,
+                    colors: white,
+                    size: 26,
+                    weight: FontWeight.w300,
+                  )))
+        ],
       ),
     );
   }
