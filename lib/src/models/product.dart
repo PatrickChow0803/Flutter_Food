@@ -18,9 +18,9 @@ class ProductModel {
 
   String _id;
   String _name;
-  double _rating;
+  int _rating;
   String _image;
-  double _price;
+  int _price;
   int _restaurantId;
   String _description;
   String _restaurant;
@@ -30,9 +30,9 @@ class ProductModel {
 
   String get id => _id;
   String get name => _name;
-  double get rating => _rating;
+  int get rating => _rating;
   String get image => _image;
-  double get price => _price;
+  int get price => _price;
   int get restaurantId => _restaurantId;
   String get restaurant => _restaurant;
   String get description => _description;
