@@ -7,7 +7,19 @@ class ProductServices {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<ProductModel>> getProducts() async =>
+      // Look in the collection named "products" and return everything in that collection
       _firestore.collection(collection).get().then((result) {
+        List<ProductModel> products = [];
+        for (DocumentSnapshot product in result.docs) {
+          products.add(ProductModel.fromSnapshot(product));
+        }
+        return products;
+      });
+
+  Future<List<ProductModel>> getProductsByCategory({String category}) async =>
+      // Look in the collection named "products" and return the products where each document's category field is
+      // equal to the category String that's passed in
+      _firestore.collection(collection).where("category", isEqualTo: category).get().then((result) {
         List<ProductModel> products = [];
         for (DocumentSnapshot product in result.docs) {
           products.add(ProductModel.fromSnapshot(product));
