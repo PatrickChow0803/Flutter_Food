@@ -9,7 +9,7 @@ import 'package:flutter_food/src/widgets/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import 'product.dart';
+import '../widgets/product.dart';
 
 class CategoryScreen extends StatelessWidget {
   final CategoryModel categoryModel;

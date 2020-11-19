@@ -228,17 +228,8 @@ class _HomeState extends State<Home> {
             ),
             Column(
               children: restaurantProvider.restaurants
-                  .map((item) => GestureDetector(
-                        onTap: () {
-                          changeScreen(
-                              context,
-                              RestaurantScreen(
-                                restaurantModel: item,
-                              ));
-                        },
-                        child: RestaurantWidget(
-                          restaurant: item,
-                        ),
+                  .map((item) => RestaurantWidget(
+                        restaurant: item,
                       ))
                   .toList(),
             )

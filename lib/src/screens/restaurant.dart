@@ -4,6 +4,7 @@ import 'package:flutter_food/src/helpers/style.dart';
 import 'package:flutter_food/src/models/restaurant.dart';
 import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/screens/details.dart';
+import 'file:///C:/Users/Agela/AndroidStudioProjects/Santos-Enoque/food/flutter_food/lib/src/widgets/product.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:flutter_food/src/widgets/loading.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,7 @@ import 'package:transparent_image/transparent_image.dart';
 class RestaurantScreen extends StatelessWidget {
   final RestaurantModel restaurantModel;
 
-  const RestaurantScreen({Key key, this.restaurantModel}) : super(key: key);
+  const RestaurantScreen({this.restaurantModel});
 
   @override
   Widget build(BuildContext context) {
@@ -121,8 +122,21 @@ class RestaurantScreen extends StatelessWidget {
                       ),
                     ),
                   )),
-
               // close button
+
+              //like button
+              Positioned.fill(
+                  top: 5,
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: GestureDetector(
+                        onTap: () {},
+//                            child: IconButton(onPressed: (){},),
+                      ),
+                    ),
+                  )),
               Positioned.fill(
                   top: 5,
                   child: Align(
@@ -141,20 +155,6 @@ class RestaurantScreen extends StatelessWidget {
                               Icons.close,
                               color: white,
                             )),
-                      ),
-                    ),
-                  )),
-
-              //like button
-              Positioned.fill(
-                  top: 5,
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: GestureDetector(
-                        onTap: () {},
-//                            child: IconButton(onPressed: (){},),
                       ),
                     ),
                   )),
@@ -178,23 +178,18 @@ class RestaurantScreen extends StatelessWidget {
                   child: FlatButton.icon(
                       onPressed: () {},
                       icon: Icon(Icons.restaurant_menu),
-                      label: CustomText(text: "Book Now")))
+                      label: CustomText(text: "Book Now"))),
             ],
           ),
 
           // products
-//              Column(
-//                children: productProvider.productsByRestaurant
-//                    .map((item) => GestureDetector(
-//                  onTap: () {
-//                    changeScreen(context, Details(product: item,));
-//                  },
-//                  child: ProductWidget(
-//                    product: item,
-//                  ),
-//                ))
-//                    .toList(),
-//              )
+          Column(
+            children: productProvider.productsByRestaurant
+                .map((item) => ProductWidget(
+                      product: item,
+                    ))
+                .toList(),
+          )
         ],
       )),
     );
