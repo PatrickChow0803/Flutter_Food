@@ -48,7 +48,7 @@ class _ShoppingBagState extends State<ShoppingBag> {
                       radius: 10,
                       child: CustomText(
                         text: '2',
-                        colors: white,
+                        color: white,
                       ),
                     ),
                   ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/screen_navigation.dart';
 import 'package:flutter_food/src/providers/category.dart';
+import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/providers/restaurant.dart';
 import 'package:flutter_food/src/providers/user.dart';
+import 'package:flutter_food/src/screens/category.dart';
+import 'package:flutter_food/src/screens/restaurant.dart';
 import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
@@ -23,6 +26,8 @@ class _HomeState extends State<Home> {
     final userProvider = Provider.of<UserProvider>(context);
     final categoryProvider = Provider.of<CategoryProvider>(context);
     final restaurantProvider = Provider.of<RestaurantProvider>(context);
+    final productProvider = Provider.of<ProductProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: white),
@@ -31,7 +36,7 @@ class _HomeState extends State<Home> {
         title: CustomText(
           text: 'Food App',
           size: 18,
-          colors: white,
+          color: white,
           weight: FontWeight.bold,
         ),
         actions: [
@@ -83,13 +88,13 @@ class _HomeState extends State<Home> {
           UserAccountsDrawerHeader(
             accountName: CustomText(
               text: userProvider.userModel.name,
-              colors: white,
+              color: white,
             ),
             accountEmail: Opacity(
               opacity: 0.8,
               child: CustomText(
                 text: userProvider.userModel.email,
-                colors: white,
+                color: white,
               ),
             ),
             decoration: BoxDecoration(color: Theme.of(context).primaryColor),
@@ -190,14 +195,14 @@ class _HomeState extends State<Home> {
                   child: CustomText(
                     text: "Featured Food",
                     size: 20.0,
-                    colors: grey,
+                    color: grey,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomText(
                     text: 'See All',
-                    colors: Theme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                 )
               ],
@@ -210,24 +215,21 @@ class _HomeState extends State<Home> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: CustomText(text: "Popular Restaurants", size: 20.0, colors: grey),
+                  child: CustomText(text: "Popular Restaurants", size: 20.0, color: grey),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomText(
                     text: 'Show All',
-                    colors: Theme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                 )
               ],
             ),
             Column(
               children: restaurantProvider.restaurants
-                  .map((item) => GestureDetector(
-                        onTap: () {},
-                        child: RestaurantWidget(
-                          restaurant: item,
-                        ),
+                  .map((item) => RestaurantWidget(
+                        restaurant: item,
                       ))
                   .toList(),
             )

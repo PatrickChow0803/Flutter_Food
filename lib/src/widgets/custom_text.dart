@@ -4,10 +4,10 @@ import 'file:///C:/Users/Agela/AndroidStudioProjects/Santos-Enoque/food/flutter_
 class CustomText extends StatelessWidget {
   final String text;
   final double size;
-  final Color colors;
+  final Color color;
   final FontWeight weight;
 
-  CustomText({@required this.text, this.size, this.colors, this.weight});
+  CustomText({@required this.text, this.size, this.color, this.weight});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class CustomText extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: size ?? 16,
-        color: colors ?? black,
+        color: color ?? black,
         fontWeight: weight ?? FontWeight.normal,
       ),
     );

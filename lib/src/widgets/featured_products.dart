@@ -108,7 +108,7 @@ class Featured extends StatelessWidget {
                                 children: [
                                   CustomText(
                                       text: productsList.products[index].rating.toString(),
-                                      colors: grey,
+                                      color: grey,
                                       size: 14),
                                   SizedBox(width: 4.0),
                                   Icon(Icons.star, size: 18, color: red),
