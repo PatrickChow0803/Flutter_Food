@@ -17,12 +17,12 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  _loadProductsByCategory(String categoryName) async {
+  Future _loadProductsByCategory(String categoryName) async {
     productsByCategory = await _productServices.getProductsByCategory(category: categoryName);
     notifyListeners();
   }
 
-  _loadProductsByRestaurant({int restaurantId}) async {
+  Future _loadProductsByRestaurant({int restaurantId}) async {
     productsByRestaurant = await _productServices.getProductsByRestaurant(id: restaurantId);
     notifyListeners();
   }
