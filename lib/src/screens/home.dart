@@ -5,6 +5,7 @@ import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/providers/restaurant.dart';
 import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/screens/category.dart';
+import 'package:flutter_food/src/screens/restaurant.dart';
 import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
@@ -228,7 +229,13 @@ class _HomeState extends State<Home> {
             Column(
               children: restaurantProvider.restaurants
                   .map((item) => GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          changeScreen(
+                              context,
+                              RestaurantScreen(
+                                restaurantModel: item,
+                              ));
+                        },
                         child: RestaurantWidget(
                           restaurant: item,
                         ),

@@ -9,6 +9,8 @@ import 'package:flutter_food/src/widgets/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import 'product.dart';
+
 class CategoryScreen extends StatelessWidget {
   final CategoryModel categoryModel;
 
@@ -101,20 +103,27 @@ class CategoryScreen extends StatelessWidget {
           ),
           Column(
             children: productProvider.productsByCategory
-                .map((item) => GestureDetector(
-                      onTap: () {
-                        changeScreen(
-                            context,
-                            Details(
-                              product: item,
-                            ));
-                      },
-//                      child: ProductWidget(
-//                        product: item,
-//                      ),
+                .map((product) => ProductWidget(
+                      product: product,
                     ))
                 .toList(),
           )
+//          Column(
+//            children: productProvider.productsByCategory
+//                .map((item) => GestureDetector(
+//                      onTap: () {
+//                        changeScreen(
+//                            context,
+//                            Details(
+//                              product: item,
+//                            ));
+//                      },
+//                      child: ProductWidget(
+//                        product: item,
+//                      ),
+//                    ))
+//                .toList(),
+//          )
         ],
       )),
     );

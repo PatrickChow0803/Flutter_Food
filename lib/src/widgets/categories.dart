@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/screen_navigation.dart';
 import 'package:flutter_food/src/models/category.dart';
+import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/screens/category.dart';
 import 'package:flutter_food/src/widgets/loading.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../helpers/style.dart';
@@ -15,8 +17,10 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
     return GestureDetector(
       onTap: () async {
+        await productProvider.loadProductsByCategory(categoryName: category.name);
         changeScreen(context, CategoryScreen(categoryModel: category));
       },
       child: Padding(
