@@ -69,7 +69,7 @@ class CategoryWidget extends StatelessWidget {
                   alignment: Alignment.center,
                   child: CustomText(
                     text: category.name,
-                    colors: white,
+                    color: white,
                     size: 26,
                     weight: FontWeight.w300,
                   )))

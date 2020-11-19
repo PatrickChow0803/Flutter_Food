@@ -71,7 +71,7 @@ class _DetailsState extends State<Details> {
                                 radius: 10,
                                 child: CustomText(
                                   text: '2',
-                                  colors: white,
+                                  color: white,
                                 ),
                               ),
                             ),
@@ -111,7 +111,7 @@ class _DetailsState extends State<Details> {
             text: '\$' + widget.product.price.toString(),
             size: 16,
             weight: FontWeight.w400,
-            colors: red,
+            color: red,
           ),
           SizedBox(height: 10),
           Row(
@@ -126,7 +126,7 @@ class _DetailsState extends State<Details> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
-                    child: CustomText(text: 'Add To Bag', colors: white, size: 20),
+                    child: CustomText(text: 'Add To Bag', color: white, size: 20),
                   ),
                 ),
               ),

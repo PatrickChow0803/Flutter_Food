@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
         title: CustomText(
           text: 'Food App',
           size: 18,
-          colors: white,
+          color: white,
           weight: FontWeight.bold,
         ),
         actions: [
@@ -83,13 +83,13 @@ class _HomeState extends State<Home> {
           UserAccountsDrawerHeader(
             accountName: CustomText(
               text: userProvider.userModel.name,
-              colors: white,
+              color: white,
             ),
             accountEmail: Opacity(
               opacity: 0.8,
               child: CustomText(
                 text: userProvider.userModel.email,
-                colors: white,
+                color: white,
               ),
             ),
             decoration: BoxDecoration(color: Theme.of(context).primaryColor),
@@ -190,14 +190,14 @@ class _HomeState extends State<Home> {
                   child: CustomText(
                     text: "Featured Food",
                     size: 20.0,
-                    colors: grey,
+                    color: grey,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomText(
                     text: 'See All',
-                    colors: Theme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                 )
               ],
@@ -210,13 +210,13 @@ class _HomeState extends State<Home> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: CustomText(text: "Popular Restaurants", size: 20.0, colors: grey),
+                  child: CustomText(text: "Popular Restaurants", size: 20.0, color: grey),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomText(
                     text: 'Show All',
-                    colors: Theme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                 )
               ],

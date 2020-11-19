@@ -124,7 +124,7 @@ class _RegistrationState extends State<Registration> {
                               CustomText(
                                 text: 'Register',
                                 size: 24,
-                                colors: white,
+                                color: white,
                               ),
                             ],
                           ),

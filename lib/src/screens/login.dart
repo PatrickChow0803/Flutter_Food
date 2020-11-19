@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               CustomText(
                                 text: 'Login',
                                 size: 24,
-                                colors: white,
+                                color: white,
                               ),
                             ],
                           ),
