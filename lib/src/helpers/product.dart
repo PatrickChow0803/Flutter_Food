@@ -16,6 +16,17 @@ class ProductServices {
         return products;
       });
 
+  Future<List<ProductModel>> getProductsByRestaurant({int id}) async =>
+      // Look in the collection named "products" and return the products where each document's restaurantId field is
+      // equal to the restaurantId int that's passed in
+      _firestore.collection(collection).where("restaurantId", isEqualTo: id).get().then((result) {
+        List<ProductModel> products = [];
+        for (DocumentSnapshot product in result.docs) {
+          products.add(ProductModel.fromSnapshot(product));
+        }
+        return products;
+      });
+
   Future<List<ProductModel>> getProductsByCategory({String category}) async =>
       // Look in the collection named "products" and return the products where each document's category field is
       // equal to the category String that's passed in
