@@ -5,6 +5,8 @@ import '../helpers/product.dart';
 class ProductProvider with ChangeNotifier {
   ProductServices _productServices = ProductServices();
   List<ProductModel> products = [];
+  List<ProductModel> productsByCategory = [];
+  List<ProductModel> productsByRestaurant = [];
 
   ProductProvider.initialize() {
     _loadProducts();
@@ -12,6 +14,16 @@ class ProductProvider with ChangeNotifier {
 
   _loadProducts() async {
     products = await _productServices.getProducts();
+    notifyListeners();
+  }
+
+  _loadProductsByCategory(String categoryName) async {
+    productsByCategory = await _productServices.getProductsByCategory(category: categoryName);
+    notifyListeners();
+  }
+
+  _loadProductsByRestaurant({int restaurantId}) async {
+    productsByRestaurant = await _productServices.getProductsByRestaurant(id: restaurantId);
     notifyListeners();
   }
 }
