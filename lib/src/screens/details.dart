@@ -1,139 +1,151 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_food/src/helpers/screen_navigation.dart';
 import 'package:flutter_food/src/helpers/style.dart';
 import 'package:flutter_food/src/models/product.dart';
+import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
+import 'package:flutter_food/src/widgets/loading.dart';
+import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class Details extends StatefulWidget {
   final ProductModel product;
 
-  Details({@required this.product});
+  const Details({@required this.product});
 
   @override
   _DetailsState createState() => _DetailsState();
 }
 
 class _DetailsState extends State<Details> {
+  int quantity = 1;
+  final _key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
+//    final app = Provider.of<AppProvider>(context);
+
     return Scaffold(
+      key: _key,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: black),
+        backgroundColor: white,
+        elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+//              changeScreen(context, CartScreen());
+            },
+          ),
+        ],
+        leading: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+      ),
       backgroundColor: white,
-      body: Column(
-        children: [
-          SafeArea(
-            child: Container(
-              height: 300,
-              child: Stack(
-                children: [
-                  Carousel(
-                    images: [
-                      Image.asset('images/${widget.product.image}'),
-                      Image.asset('images/${widget.product.image}'),
-                      Image.asset('images/${widget.product.image}'),
-                    ],
-                    dotBgColor: white,
-                    dotColor: grey,
-                    dotIncreasedColor: red,
-                    dotIncreaseSize: 1.2,
-                    autoplay: false,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.keyboard_backspace),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      Stack(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'images/shopping-bag.png',
-                              width: 30,
-                              height: 30,
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 7,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(blurRadius: 3, color: Colors.grey, spreadRadius: 1)
-                                ],
-                              ),
-                              child: CircleAvatar(
-                                radius: 10,
-                                child: CustomText(
-                                  text: '2',
-                                  color: white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: 65,
-                    right: 13,
-                    child: Container(
-                      decoration: BoxDecoration(
-//                        shape: BoxShape.circle,
-                        color: white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: grey[400],
-                            offset: Offset(2, 3),
-                            blurRadius: 3,
-                          ),
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.favorite,
-                        color: red,
-                      ),
-                    ),
-                  )
-                ],
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              radius: 130,
+              backgroundImage: NetworkImage(widget.product.image),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            CustomText(text: widget.product.name, size: 26, weight: FontWeight.bold),
+            CustomText(text: "\$${widget.product.price}", size: 20, weight: FontWeight.w400),
+            SizedBox(
+              height: 10,
+            ),
+            CustomText(text: "Description", size: 18, weight: FontWeight.w400),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.product.description,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: grey, fontWeight: FontWeight.w300),
               ),
             ),
-          ),
-          CustomText(text: widget.product.name, size: 20, weight: FontWeight.bold),
-          CustomText(
-            text: '\$' + widget.product.price.toString(),
-            size: 16,
-            weight: FontWeight.w400,
-            color: red,
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(icon: Icon(Icons.remove, size: 36), onPressed: () {}),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: red,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
-                    child: CustomText(text: 'Add To Bag', color: white, size: 20),
-                  ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.remove,
+                        size: 36,
+                      ),
+                      onPressed: () {
+                        if (quantity != 1) {
+                          setState(() {
+                            quantity -= 1;
+                          });
+                        }
+                      }),
                 ),
-              ),
-              IconButton(icon: Icon(Icons.add, size: 36, color: red), onPressed: () {}),
-            ],
-          )
-        ],
+
+//                GestureDetector(
+//                  onTap: ()async{
+//                    app.changeLoading();
+//                    print("All set loading");
+//
+//                    bool value =  await user.addToCard(product: widget.product, quantity: quantity);
+//                    if(value){
+//                      print("Item added to cart");
+//                      _key.currentState.showSnackBar(
+//                          SnackBar(content: Text("Added ro Cart!"))
+//                      );
+//                      user.reloadUserModel();
+//                      app.changeLoading();
+//                      return;
+//                    } else{
+//                      print("Item NOT added to cart");
+//
+//                    }
+//                    print("lOADING SET TO FALSE");
+//
+//                  },
+//                  child: Container(
+//                    decoration: BoxDecoration(
+//                        color: Theme.of(context).primaryColor,
+//                        borderRadius: BorderRadius.circular(20)
+//                    ),
+//                    child: app.isLoading ? Loading() : Padding(
+//                      padding: const EdgeInsets.fromLTRB(28,12,28,12),
+//                      child: CustomText(text: "Add $quantity To Cart",color: white,size: 22,weight: FontWeight.w300,),
+//                    ),
+//
+//                  ),
+//                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.add,
+                        size: 36,
+                        color: red,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          quantity += 1;
+                        });
+                      }),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
