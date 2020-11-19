@@ -1,53 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/screen_navigation.dart';
 import 'package:flutter_food/src/models/product.dart';
+import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/screens/details.dart';
+import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../helpers/style.dart';
 import 'custom_text.dart';
-
-List<Product> productsList = [
-  Product(
-    name: 'Cereal',
-    price: 5.99,
-    rating: 4.2,
-    vendor: "GoodFoos",
-    wishList: true,
-    image: "1.jpg",
-  ),
-  Product(
-    name: 'Tacos',
-    price: 12.99,
-    rating: 4.7,
-    vendor: "GoodFoos",
-    wishList: false,
-    image: "5.jpg",
-  ),
-  Product(
-    name: 'Cereal',
-    price: 5.99,
-    rating: 4.2,
-    vendor: "GoodFoos",
-    wishList: true,
-    image: "1.jpg",
-  ),
-];
+import 'loading.dart';
 
 class Featured extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final productsList = Provider.of<ProductProvider>(context);
+
     return Container(
       height: 230,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: productsList.length,
+          itemCount: productsList.products.length,
           itemBuilder: (_, index) {
             return Padding(
               padding: EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
                   // pass in the product that was clicked on as the parameter
-                  changeScreen(_, Details(product: productsList[index]));
+                  changeScreen(_, Details(product: productsList.products[index]));
                 },
                 child: Container(
                     height: 160,
@@ -61,13 +40,37 @@ class Featured extends StatelessWidget {
                     ]),
                     child: Column(
                       children: [
-                        Image.asset("images/${productsList[index].image}", width: 140, height: 140),
+                        Stack(
+                          children: [
+                            Positioned.fill(
+                                child: Align(
+                              alignment: Alignment.center,
+                              child: Loading(),
+                            )),
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+                              child: Center(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: FadeInImage.memoryNetwork(
+                                    placeholder: kTransparentImage,
+                                    image: productsList.products[index].image,
+                                    fit: BoxFit.fill,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height * .20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: CustomText(text: productsList[index].name)),
+                                child: CustomText(text: productsList.products[index].name)),
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Container(
@@ -81,17 +84,17 @@ class Featured extends StatelessWidget {
                                         blurRadius: 4,
                                       ),
                                     ]),
-                                child: Padding(
-                                    padding: EdgeInsets.all(4.0),
-                                    child: productsList[index].wishList
-                                        ? Icon(
-                                            Icons.favorite,
-                                            color: red,
-                                          )
-                                        : Icon(
-                                            Icons.favorite_border,
-                                            color: red,
-                                          )),
+//                                child: Padding(
+//                                    padding: EdgeInsets.all(4.0),
+//                                    child: productsList[index].wishList
+//                                        ? Icon(
+//                                            Icons.favorite,
+//                                            color: red,
+//                                          )
+//                                        : Icon(
+//                                            Icons.favorite_border,
+//                                            color: red,
+//                                          )),
                               ),
                             ),
                           ],
@@ -104,7 +107,7 @@ class Featured extends StatelessWidget {
                               Row(
                                 children: [
                                   CustomText(
-                                      text: productsList[index].rating.toString(),
+                                      text: productsList.products[index].rating.toString(),
                                       colors: grey,
                                       size: 14),
                                   SizedBox(width: 4.0),
@@ -118,7 +121,7 @@ class Featured extends StatelessWidget {
                               Padding(
                                   padding: EdgeInsets.only(right: 8.0),
                                   child: CustomText(
-                                    text: "\$${productsList[index].price}",
+                                    text: "\$${productsList.products[index].price}",
                                     weight: FontWeight.bold,
                                   ))
                             ],

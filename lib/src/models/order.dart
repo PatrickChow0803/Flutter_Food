@@ -4,29 +4,37 @@ class OrderModel {
   // THESE STATIC CONST VARIABLES ARE USED TO REPRESENT THE NAME OF THE FIELD IN FIRESTORE
   // NOT THE DATA
   static const ID = 'id';
-  static const NAME = 'name';
+  static const DESCRIPTION = 'description';
   static const PRODUCT_ID = 'productId';
-  static const PRICE = 'price';
+  static const USER_ID = 'userId';
+  static const AMOUNT = 'amount';
   static const STATUS = 'status';
+  static const CREATED_AT = 'createdAt';
 
   String _id;
-  String _name;
+  String _description;
   String _productId;
-  double _price;
+  String _userId;
+  int _amount;
   String _status;
+  int _createdAt;
 
-  String get Id => _id;
-  String get name => _name;
+  String get id => _id;
+  String get description => _description;
   String get productId => _productId;
-  double get price => _price;
+  String get userId => _userId;
+  int get amount => _amount;
   String get status => _status;
+  int get createdAt => _createdAt;
 
   // .fromSnapshot can be anything I want. I'm naming it this because that's the data from firebase
   OrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data()[ID];
-    _name = snapshot.data()[NAME];
+    _description = snapshot.data()[DESCRIPTION];
     _productId = snapshot.data()[PRODUCT_ID];
-    _price = snapshot.data()[PRICE];
+    _userId = snapshot.data()[USER_ID];
+    _amount = snapshot.data()[AMOUNT];
     _status = snapshot.data()[STATUS];
+    _createdAt = snapshot.data()[CREATED_AT];
   }
 }

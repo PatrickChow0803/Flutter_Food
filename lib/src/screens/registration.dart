@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/screen_navigation.dart';
 import 'package:flutter_food/src/helpers/style.dart';
-import 'package:flutter_food/src/providers/auth.dart';
+import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/screens/login.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:flutter_food/src/widgets/loading.dart';
@@ -21,7 +21,7 @@ class _RegistrationState extends State<Registration> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     return authProvider.status == Status.Authenticating
         ? Loading()
         : Scaffold(

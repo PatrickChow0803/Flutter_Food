@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_food/src/providers/auth.dart';
+import 'package:flutter_food/src/providers/category.dart';
+import 'package:flutter_food/src/providers/product.dart';
+import 'package:flutter_food/src/providers/restaurant.dart';
+import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/screens/home.dart';
 import 'package:flutter_food/src/screens/login.dart';
 import 'package:flutter_food/src/widgets/loading.dart';
@@ -20,7 +23,10 @@ class MyApp extends StatelessWidget {
     // Tells the app what providers that I'm going to use throughout the application
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: AuthProvider.initialize()),
+        ChangeNotifierProvider.value(value: UserProvider.initialize()),
+        ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
+        ChangeNotifierProvider.value(value: RestaurantProvider.initialize()),
+        ChangeNotifierProvider.value(value: ProductProvider.initialize()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
 class ScreensController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<AuthProvider>(context);
+    final auth = Provider.of<UserProvider>(context);
     switch (auth.status) {
       case Status.Uninitialized:
         return LoginScreen();

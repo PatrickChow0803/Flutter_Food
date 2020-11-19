@@ -1,59 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/models/category.dart';
+import 'package:flutter_food/src/widgets/loading.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../helpers/style.dart';
 import 'custom_text.dart';
 
-List<Category> categoriesList = [
-  Category(name: "Salad", image: "salad.png"),
-  Category(name: "Steak", image: "steak.png"),
-  Category(name: "Fast Food", image: "sandwich.png"),
-  Category(name: "Desserts", image: "ice-cream.png"),
-  Category(name: "Seafood", image: "fish.png"),
-  Category(name: "Beer", image: "pint.png"),
-];
+class CategoryWidget extends StatelessWidget {
+  final CategoryModel category;
 
-class Categories extends StatelessWidget {
+  CategoryWidget({this.category});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 105,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categoriesList.length,
-        itemBuilder: (_, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: red[50],
-                        offset: Offset(4, 6),
-                        blurRadius: 12,
+    return Padding(
+      padding: const EdgeInsets.all(6),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            width: 140,
+            height: 160,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                        child: Align(
+                      alignment: Alignment.center,
+                      child: Loading(),
+                    )),
+                    Center(
+                      child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: category.image,
+                        fit: BoxFit.fill,
+                        // Have to make the width and height match the container in order for the
+                        // fit to work properly
+                        width: 140,
+                        height: 160,
                       ),
-                    ],
-                  ),
-                  child: Padding(
-                      padding: EdgeInsets.all(6.0),
-                      child: Image.asset(
-                        'images/${categoriesList[index].image}',
-                        width: 50,
-                      )),
+                    ),
+                  ],
+                )),
+          ),
+          Container(
+            width: 140,
+            height: 160,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
-                SizedBox(height: 10),
-                CustomText(
-                  text: categoriesList[index].name,
-                  size: 14,
-                  colors: black,
-                )
-              ],
-            ),
-          );
-        },
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.1),
+                    Colors.black.withOpacity(0.05),
+                    Colors.black.withOpacity(0.025),
+                  ],
+                )),
+          ),
+          Positioned.fill(
+              child: Align(
+                  alignment: Alignment.center,
+                  child: CustomText(
+                    text: category.name,
+                    colors: white,
+                    size: 26,
+                    weight: FontWeight.w300,
+                  )))
+        ],
       ),
     );
   }
