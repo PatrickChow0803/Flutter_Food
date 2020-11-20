@@ -6,6 +6,7 @@ import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/providers/restaurant.dart';
 import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/screens/category.dart';
+import 'package:flutter_food/src/screens/product_search.dart';
 import 'package:flutter_food/src/screens/restaurant.dart';
 import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
@@ -166,6 +167,14 @@ class _HomeState extends State<Home> {
                             color: Theme.of(context).primaryColor,
                           ),
                           title: TextField(
+                            // replaces the checkmark with a search icon in the soft keypad
+                            textInputAction: TextInputAction.search,
+                            onSubmitted: (pattern) async {
+                              appProvider.changeLoading();
+                              await productProvider.searchProducts(productName: pattern);
+                              changeScreen(context, ProductSearchScreen());
+                              appProvider.changeLoading();
+                            },
                             decoration: InputDecoration(
                               hintText: 'Find food or restaurants',
                               border: InputBorder.none,

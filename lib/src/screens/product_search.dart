@@ -15,6 +15,8 @@ class ProductSearchScreen extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         backgroundColor: white,
+        centerTitle: true,
+        elevation: 0.0,
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: () {
@@ -22,19 +24,28 @@ class ProductSearchScreen extends StatelessWidget {
           },
         ),
         actions: [IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {})],
-        title: Text("Products"),
+        title: CustomText(
+          text: "Products",
+          size: 20,
+          color: Theme.of(context).primaryColor,
+        ),
       ),
       body: productProvider.productsSearched.length < 1
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.search, color: grey, size: 30),
-                CustomText(
-                  text: 'No Products Found',
-                  color: grey[300],
-                  size: 25,
-                ),
-              ],
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.search, color: grey, size: 100),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  CustomText(
+                    text: 'No Products Found',
+                    color: grey[300],
+                    size: 30,
+                  ),
+                ],
+              ),
             )
           : ListView.builder(
               itemBuilder: (_, index) {
