@@ -28,6 +28,7 @@ class RestaurantModel {
   bool get popular => _popular;
 
   // .fromSnapshot can be anything I want. I'm naming it this because that's the data from firebase
+  // Used to convert a a SnapShot into the corresponding model
   RestaurantModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data()[ID];
     _name = snapshot.data()[NAME];
