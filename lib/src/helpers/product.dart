@@ -37,4 +37,22 @@ class ProductServices {
         }
         return products;
       });
+
+  Future<List<ProductModel>> searchProducts({String productName}) async {
+    // Look in the collection named "products", order the documents by the field "name",
+    // Return the documents where "name" starts with productName and ends with anything(uf8ff)
+    _firestore
+        .collection(collection)
+        .orderBy("name")
+        .startAt([productName])
+        .endAt([productName + '\uf8ff'])
+        .get()
+        .then((result) {
+          List<ProductModel> products = [];
+          for (DocumentSnapshot product in result.docs) {
+            products.add(ProductModel.fromSnapshot(product));
+          }
+          return products;
+        });
+  }
 }
