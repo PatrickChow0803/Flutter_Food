@@ -6,6 +6,8 @@ class RestaurantProvider with ChangeNotifier {
   RestaurantService _restaurantService = RestaurantService();
   List<RestaurantModel> restaurants = [];
   RestaurantModel restaurant;
+  List<RestaurantModel> searchedRestaurants = [];
+
   RestaurantProvider.initialize() {
     _loadRestaurants();
   }
@@ -17,6 +19,11 @@ class RestaurantProvider with ChangeNotifier {
 
   Future<void> loadSingleRestaurant({int restaurantId}) async {
     restaurant = await _restaurantService.getRestaurantById(id: restaurantId);
+    notifyListeners();
+  }
+
+  Future<void> searchRestaurants({String restaurantName}) async {
+    searchedRestaurants = await _restaurantService.searchRestaurant(restaurantName: restaurantName);
     notifyListeners();
   }
 }
