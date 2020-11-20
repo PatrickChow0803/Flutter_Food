@@ -10,6 +10,7 @@ class RestaurantProvider with ChangeNotifier {
 
   RestaurantProvider.initialize() {
     _loadRestaurants();
+//    searchRestaurants(restaurantName: "g");
   }
 
   Future<void> _loadRestaurants() async {
@@ -24,6 +25,7 @@ class RestaurantProvider with ChangeNotifier {
 
   Future<void> searchRestaurants({String restaurantName}) async {
     searchedRestaurants = await _restaurantService.searchRestaurant(restaurantName: restaurantName);
+    print("Restaurants: " + "${searchedRestaurants.length}");
     notifyListeners();
   }
 }

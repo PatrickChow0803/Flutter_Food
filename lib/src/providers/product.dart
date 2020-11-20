@@ -11,7 +11,7 @@ class ProductProvider with ChangeNotifier {
 
   ProductProvider.initialize() {
     _loadProducts();
-    search();
+//    searchProducts(productName: "Pizza");
   }
 
   Future<void> _loadProducts() async {
@@ -29,8 +29,9 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future search({String productName}) async {
+  Future searchProducts({String productName}) async {
     productsSearched = await _productServices.searchProducts(productName: productName);
+    print("Products: " + "${productsSearched.length}");
     notifyListeners();
   }
 }
