@@ -24,4 +24,24 @@ class RestaurantService {
       _firestore.collection(collection).doc(id.toString()).get().then((doc) {
         return RestaurantModel.fromSnapshot(doc);
       });
+
+  Future<List<RestaurantModel>> searchRestaurant({String restaurantName}) async {
+    // Because the products in FireStore start with an upper case letter, I need to convert the passed in string to ensure that the first letter is upper case.
+    String searchKey = restaurantName[0].toUpperCase() + restaurantName.substring(1);
+    // Look in the collection named "restaurants", order the documents by the field "name",
+    // Return the documents where "name" starts with restaurantName and ends with anything(uf8ff)
+    return _firestore
+        .collection(collection)
+        .orderBy("name")
+        .startAt([searchKey])
+        .endAt([searchKey + '\uf8ff'])
+        .get()
+        .then((result) {
+          List<RestaurantModel> restaurants = [];
+          for (DocumentSnapshot restaurant in result.docs) {
+            restaurants.add(RestaurantModel.fromSnapshot(restaurant));
+          }
+          return restaurants;
+        });
+  }
 }
