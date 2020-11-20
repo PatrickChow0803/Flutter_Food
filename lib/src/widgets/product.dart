@@ -5,6 +5,7 @@ import 'package:flutter_food/src/models/product.dart';
 import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/providers/restaurant.dart';
 import 'package:flutter_food/src/screens/details.dart';
+import 'package:flutter_food/src/screens/restaurant.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 
@@ -98,18 +99,20 @@ class ProductWidget extends StatelessWidget {
                             width: 10,
                           ),
                           GestureDetector(
-//                            onTap: ()async{
-//                              await productProvider.loadProductsByRestaurant(
-//                                  restaurantId: product.restaurantId.toString());
-//                              await restaurantProvider.loadSingleRestaurant(retaurantId: product.restaurantId.toString());
-//                              changeScreen(context, RestaurantScreen(restaurantModel: restaurantProvider.restaurant,));
-//                            },
+                              onTap: () async {
+                                await restaurantProvider.loadSingleRestaurant(product.restaurantId);
+                                changeScreen(
+                                    context,
+                                    RestaurantScreen(
+                                      restaurantModel: restaurantProvider.restaurant,
+                                    ));
+                              },
                               child: CustomText(
-                            text: product.restaurant,
-                            color: Theme.of(context).primaryColor,
-                            weight: FontWeight.w300,
-                            size: 14,
-                          )),
+                                text: product.restaurant,
+                                color: Theme.of(context).primaryColor,
+                                weight: FontWeight.w300,
+                                size: 14,
+                              )),
                         ],
                       ),
                     ),
