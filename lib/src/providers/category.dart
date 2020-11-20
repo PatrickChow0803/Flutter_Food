@@ -10,7 +10,7 @@ class CategoryProvider with ChangeNotifier {
     _loadCategories();
   }
 
-  void _loadCategories() async {
+  Future<void> _loadCategories() async {
     categories = await _categoryServices.getCategories();
     notifyListeners();
   }

@@ -10,12 +10,12 @@ class RestaurantProvider with ChangeNotifier {
     _loadRestaurants();
   }
 
-  void _loadRestaurants() async {
+  Future<void> _loadRestaurants() async {
     restaurants = await _restaurantService.getRestaurants();
     notifyListeners();
   }
 
-  void loadSingleRestaurant(int restaurantId) async {
+  Future<void> loadSingleRestaurant({int restaurantId}) async {
     restaurant = await _restaurantService.getRestaurantById(id: restaurantId);
     notifyListeners();
   }
