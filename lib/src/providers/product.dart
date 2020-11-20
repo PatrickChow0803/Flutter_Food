@@ -12,7 +12,7 @@ class ProductProvider with ChangeNotifier {
     _loadProducts();
   }
 
-  _loadProducts() async {
+  Future<void> _loadProducts() async {
     products = await _productServices.getProducts();
     notifyListeners();
   }

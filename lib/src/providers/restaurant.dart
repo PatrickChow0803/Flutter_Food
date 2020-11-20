@@ -5,13 +5,18 @@ import '../models/restaurant.dart';
 class RestaurantProvider with ChangeNotifier {
   RestaurantService _restaurantService = RestaurantService();
   List<RestaurantModel> restaurants = [];
-
+  RestaurantModel restaurant;
   RestaurantProvider.initialize() {
     _loadRestaurants();
   }
 
-  _loadRestaurants() async {
+  Future<void> _loadRestaurants() async {
     restaurants = await _restaurantService.getRestaurants();
+    notifyListeners();
+  }
+
+  Future<void> loadSingleRestaurant({int restaurantId}) async {
+    restaurant = await _restaurantService.getRestaurantById(id: restaurantId);
     notifyListeners();
   }
 }

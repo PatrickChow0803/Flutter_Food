@@ -28,6 +28,7 @@ class OrderModel {
   int get createdAt => _createdAt;
 
   // .fromSnapshot can be anything I want. I'm naming it this because that's the data from firebase
+  // Used to convert a a SnapShot into the corresponding model
   OrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data()[ID];
     _description = snapshot.data()[DESCRIPTION];
