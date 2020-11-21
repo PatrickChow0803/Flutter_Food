@@ -5,6 +5,7 @@ import 'package:flutter_food/src/helpers/style.dart';
 import 'package:flutter_food/src/models/product.dart';
 import 'package:flutter_food/src/providers/app.dart';
 import 'package:flutter_food/src/providers/user.dart';
+import 'package:flutter_food/src/screens/cart.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:flutter_food/src/widgets/loading.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,7 @@ class _DetailsState extends State<Details> {
           IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
-//              changeScreen(context, CartScreen());
+              changeScreen(context, CartScreen());
             },
           ),
         ],
@@ -100,6 +101,8 @@ class _DetailsState extends State<Details> {
                   onTap: () {
                     appProvider.changeLoading();
                     userProvider.addToCart(product: widget.product, quantity: quantity);
+                    _key.currentState.showSnackBar(SnackBar(
+                        content: Text("Added $quantity ${widget.product.name} to the Cart!")));
                     appProvider.changeLoading();
                   },
                   child: Container(

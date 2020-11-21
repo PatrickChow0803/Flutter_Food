@@ -47,7 +47,6 @@ class CartItemModel {
     _restaurantId = data[RESTAURANT_ID];
   }
 
-  // This is returning a map with these key value pairs from the object that calls this
   Map toMap() => {
         ID: _id,
         IMAGE: _image,

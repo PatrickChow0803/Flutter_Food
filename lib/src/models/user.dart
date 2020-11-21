@@ -15,7 +15,7 @@ class UserModel {
   String _email;
   String _id;
   String _stripeId;
-  List<Map> cart;
+  List<CartItemModel> cart;
 
   String get name => _name;
   String get email => _email;
@@ -29,15 +29,15 @@ class UserModel {
     _email = snapshot.data()[EMAIL];
     _id = snapshot.data()[ID];
     _stripeId = snapshot.data()[STRIPE_ID];
-    cart = snapshot.data()[CART] ?? [];
+    cart = _convertCartItems(snapshot.data()[CART]) ?? [];
   }
 
   // Gets cart items as maps, and converting them to CartItemModels to be used in the application
-//  List<CartItemModel> _convertCartItems(List cart) {
-//    List<CartItemModel> convertedCart = [];
-//    for (Map cartItem in cart) {
-//      convertedCart.add(CartItemModel.fromMap(cartItem));
-//    }
-//    return convertedCart;
-//  }
+  List<CartItemModel> _convertCartItems(List cart) {
+    List<CartItemModel> convertedCart = [];
+    for (Map cartItem in cart) {
+      convertedCart.add(CartItemModel.fromMap(cartItem));
+    }
+    return convertedCart;
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as Firebase;
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/user_services.dart';
+import 'package:flutter_food/src/models/cart_item.dart';
 import 'package:flutter_food/src/models/product.dart';
 import 'package:flutter_food/src/models/user.dart';
 import 'package:uuid/uuid.dart';
@@ -92,40 +93,38 @@ class UserProvider with ChangeNotifier {
   // Make this a bool to check to see if the method runs properly
   // All this method does is simply add products to the cart
   Future<bool> addToCart({ProductModel product, int quantity}) async {
-    try {
-      // Create a randomly generated Id
-      var uuid = Uuid();
-      String cartItemId = uuid.v4();
-      List<Map> cart = _userModel.cart;
-      bool itemExists = false;
-      // Key values MUST match the same writing as in the CartItemModel
-      Map cartItem = {
-        "id": cartItemId,
-        "name": product.name,
-        "image": product.image,
-        "productId": product.id,
-        "price": product.price,
-        "quantity": quantity,
-      };
+    // Create a randomly generated Id
+    var uuid = Uuid();
+    String cartItemId = uuid.v4();
+    List cart = _userModel.cart;
+    bool itemExists = false;
+    // Key values MUST match the same writing as in the CartItemModel
+    Map cartItem = {
+      "id": cartItemId,
+      "name": product.name,
+      "image": product.image,
+      "productId": product.id,
+      "price": product.price,
+      "quantity": quantity,
+    };
 
-      // Checks to see if the product is already in the cart.
-      // If it is, then add 1 to the product quantity
-      for (Map item in cart) {
-        if (item['productId'] == cartItem['productId']) {
-          item['quantity'] = item['quantity'] + quantity;
-          itemExists = true;
-          break;
-        }
-      }
-      if (!itemExists) {
-        cart.add(cartItem);
-      }
-      _userServices.editCart(userId: _userModel.id, cart: cart);
-      return true;
-    } catch (e) {
-      print("addToCart Error: " + e.toString());
-      return false;
-    }
+    // Checks to see if the product is already in the cart.
+    // If it is, then add 1 to the product quantity
+//    for (Map item in cart) {
+//      if (item['productId'] == cartItem['productId']) {
+//        item['quantity'] = item['quantity'] + quantity;
+//        itemExists = true;
+//        break;
+//      }
+//    }
+//    if (!itemExists) {
+//      cart.add(cartItem);
+//    }
+    CartItemModel item = CartItemModel.fromMap(cartItem);
+//      if(!itemExists){
+    print("CART ITEMS ARE: ${cart.toString()}");
+    _userServices.addToCart(userId: _user.uid, cartItem: item);
+    return true;
   }
 
   // General methods
