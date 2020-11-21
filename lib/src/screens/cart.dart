@@ -47,10 +47,10 @@ class _CartScreenState extends State<CartScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(
-                    'images/food.jpg',
+                  Image.network(
+                    userProvider.userModel.cart[index].image,
                     fit: BoxFit.fill,
-                    width: 100,
+                    width: 50,
                   ),
                   // Use RichText for multiple lines of text
                   Padding(
@@ -59,11 +59,11 @@ class _CartScreenState extends State<CartScreen> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "Pancake" + '\n',
+                            text: userProvider.userModel.cart[index].name + '\n',
                             style: TextStyle(color: black, fontSize: 20),
                           ),
                           TextSpan(
-                            text: '\$3.32',
+                            text: userProvider.userModel.cart[index].price.toString(),
                             style: TextStyle(color: black, fontSize: 16),
                           ),
                         ],
