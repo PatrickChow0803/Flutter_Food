@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart' as Firebase;
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/user_services.dart';
+import 'package:flutter_food/src/models/product.dart';
 import 'package:flutter_food/src/models/user.dart';
+import 'package:uuid/uuid.dart';
 
 enum Status {
   Uninitialized,
@@ -85,6 +87,29 @@ class UserProvider with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  // Make this a bool to check to see if the method runs properly
+  Future<bool> addToCart({ProductModel product, int quantity})async {
+    try{
+      // Create a randomly generated Id
+      var uuid = Uuid();
+      String cartItemId = uuid.v4();
+      // Key values MUST match the same writing as in the CartItemModel
+      Map values = {
+        "id": cartItemId,
+        "name": product.name,
+        "image": product.image,
+        "productId": product.id,
+        "price": product.price,
+        "quantity": quantity,
+      };
+      return true;
+    }
+    catch(e){
+      print("addToCart Error: " + e.toString());
+      return false;
+    }
   }
 
   // General methods

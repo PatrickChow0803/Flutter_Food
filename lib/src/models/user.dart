@@ -30,7 +30,7 @@ class UserModel {
     _email = snapshot.data()[EMAIL];
     _id = snapshot.data()[ID];
     _stripeId = snapshot.data()[STRIPE_ID];
-    _cart = _convertCartItems(snapshot.data()[CART]) ?? [];
+//    _cart = _convertCartItems(snapshot.data()[CART]) ?? [];
   }
 
   // Gets cart items as maps, and converting them to CartItemModels to be used in the application

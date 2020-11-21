@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/screen_navigation.dart';
 import 'package:flutter_food/src/helpers/style.dart';
 import 'package:flutter_food/src/models/product.dart';
+import 'package:flutter_food/src/providers/app.dart';
 import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:flutter_food/src/widgets/loading.dart';
@@ -24,8 +25,8 @@ class _DetailsState extends State<Details> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context);
-//    final app = Provider.of<AppProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
 
     return Scaffold(
       key: _key,
@@ -95,6 +96,30 @@ class _DetailsState extends State<Details> {
                       }),
                 ),
 
+                GestureDetector(
+                  onTap: () {
+                    appProvider.changeLoading();
+                    userProvider.addToCart(product: widget.product, quantity: quantity);
+                    appProvider.changeLoading();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: appProvider.isLoading
+                        ? Loading()
+                        : Padding(
+                            padding: const EdgeInsets.fromLTRB(28, 12, 28, 12),
+                            child: CustomText(
+                              text: "Add $quantity To Cart",
+                              color: white,
+                              size: 22,
+                              weight: FontWeight.w300,
+                            ),
+                          ),
+                  ),
+                ),
+
 //                GestureDetector(
 //                  onTap: ()async{
 //                    app.changeLoading();
@@ -116,15 +141,6 @@ class _DetailsState extends State<Details> {
 //                    print("lOADING SET TO FALSE");
 //
 //                  },
-//                  child: Container(
-//                    decoration: BoxDecoration(
-//                        color: Theme.of(context).primaryColor,
-//                        borderRadius: BorderRadius.circular(20)
-//                    ),
-//                    child: app.isLoading ? Loading() : Padding(
-//                      padding: const EdgeInsets.fromLTRB(28,12,28,12),
-//                      child: CustomText(text: "Add $quantity To Cart",color: white,size: 22,weight: FontWeight.w300,),
-//                    ),
 //
 //                  ),
 //                ),
