@@ -37,4 +37,24 @@ class ProductServices {
         }
         return products;
       });
+
+  Future<List<ProductModel>> searchProducts({String productName}) async {
+    // Because the products in FireStore start with an upper case letter, I need to convert the passed in string to ensure that the first letter is upper case.
+    String searchKey = productName[0].toUpperCase() + productName.substring(1);
+    // Look in the collection named "products", order the documents by the field "name",
+    // Return the documents where "name" starts with productName and ends with anything(uf8ff)
+    return _firestore
+        .collection(collection)
+        .orderBy("name")
+        .startAt([searchKey])
+        .endAt([searchKey + '\uf8ff'])
+        .get()
+        .then((result) {
+          List<ProductModel> products = [];
+          for (DocumentSnapshot product in result.docs) {
+            products.add(ProductModel.fromSnapshot(product));
+          }
+          return products;
+        });
+  }
 }

@@ -6,7 +6,9 @@ import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/providers/restaurant.dart';
 import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/screens/category.dart';
+import 'package:flutter_food/src/screens/product_search.dart';
 import 'package:flutter_food/src/screens/restaurant.dart';
+import 'package:flutter_food/src/screens/restaurant_search.dart';
 import 'package:flutter_food/src/widgets/bottom_navigation_icons.dart';
 import 'package:flutter_food/src/widgets/categories.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
@@ -166,14 +168,40 @@ class _HomeState extends State<Home> {
                             color: Theme.of(context).primaryColor,
                           ),
                           title: TextField(
+                            // replaces the checkmark with a search icon in the soft keypad
+                            textInputAction: TextInputAction.search,
+                            onSubmitted: (pattern) async {
+                              appProvider.changeLoading();
+                              if (appProvider.search == SearchBy.PRODUCTS) {
+                                await productProvider.searchProducts(productName: pattern);
+                                changeScreen(context, ProductSearchScreen());
+                              } else {
+                                await restaurantProvider.searchRestaurants(restaurantName: pattern);
+                                changeScreen(context, RestaurantSearchScreen());
+                              }
+                              appProvider.changeLoading();
+                            },
                             decoration: InputDecoration(
-                              hintText: 'Find food or restaurants',
+                              hintText: appProvider.search == SearchBy.PRODUCTS
+                                  ? "Search for Food"
+                                  : 'Search for Restaurants',
                               border: InputBorder.none,
                             ),
                           ),
-                          trailing: Icon(
-                            Icons.filter_list,
-                            color: Theme.of(context).primaryColor,
+                          trailing: IconButton(
+                            icon: Icon(
+                              appProvider.search == SearchBy.PRODUCTS
+                                  ? Icons.fastfood
+                                  : Icons.restaurant,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            onPressed: () {
+                              if (appProvider.search == SearchBy.PRODUCTS) {
+                                appProvider.changeSearchBy(newSearchBy: SearchBy.RESTAURANTS);
+                              } else {
+                                appProvider.changeSearchBy(newSearchBy: SearchBy.PRODUCTS);
+                              }
+                            },
                           ),
                         ),
                       ),
