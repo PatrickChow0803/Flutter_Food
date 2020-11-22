@@ -17,7 +17,7 @@ class UserModel {
   String _stripeId;
   int _priceSum = 0;
 
-  List<CartItemModel> cart;
+  List<CartItemModel> cart = [];
   int totalCartPrice;
 
   String get name => _name;

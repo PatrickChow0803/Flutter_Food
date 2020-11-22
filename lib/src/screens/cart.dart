@@ -25,13 +25,79 @@ class _CartScreenState extends State<CartScreen> {
         backgroundColor: white,
         elevation: 0.0,
         title: CustomText(
-          text: "Shopping Cart",
+          text: "Total Price: \$${userProvider.userModel.totalCartPrice.toString()}",
+          size: 20,
         ),
         leading: IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
               Navigator.pop(context);
             }),
+        actions: [
+          Center(
+              child: Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: GestureDetector(
+                    onTap: () {
+                      if (userProvider.userModel.totalCartPrice == 0) {
+                        _key.currentState.showSnackBar(SnackBar(content: Text("Cart is empty")));
+                        return;
+                      }
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0)), //this right here
+                              child: Container(
+                                height: 200,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                          text:
+                                              "You will be charged \$${userProvider.userModel.totalCartPrice} upon delivery"),
+                                      SizedBox(
+                                        width: 320.0,
+                                        child: RaisedButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            "Accept",
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 320.0,
+                                        child: RaisedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            "Reject",
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          color: red,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    child: CustomText(
+                      text: 'Pay Now',
+                      color: Theme.of(context).primaryColor,
+                      size: 20,
+                    ),
+                  )))
+        ],
       ),
       body: ListView.builder(
         itemCount: userProvider.userModel.cart.length,
@@ -87,17 +153,17 @@ class _CartScreenState extends State<CartScreen> {
                         } else {
                           print("Item was not removed");
                         }
-                      })
+                      }),
                 ],
               ),
             ),
           );
         },
       ),
-      bottomNavigationBar: Container(
-        height: 70,
-        child: Text("Total Price: ${userProvider.userModel.totalCartPrice.toString()}"),
-      ),
+//      bottomNavigationBar: Container(
+//        height: 70,
+//        child: Text("Total Price: ${userProvider.userModel.totalCartPrice.toString()}"),
+//      ),
     );
   }
 }
