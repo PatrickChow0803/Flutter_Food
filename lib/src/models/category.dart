@@ -17,7 +17,8 @@ class CategoryModel {
   String get image => _image;
 
   // .fromSnapshot can be anything I want. I'm naming it this because that's the data from firebase
-  // Used to convert a a SnapShot into the corresponding model
+  // Used to convert a a SnapShot into the corresponding model This pulls the data from FireStore
+  // and sets the values for each variable
   CategoryModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data()[ID];
     _name = snapshot.data()[NAME];

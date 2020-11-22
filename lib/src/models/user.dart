@@ -26,7 +26,8 @@ class UserModel {
   String get stripeId => _stripeId;
 
   // .fromSnapshot can be anything I want. I'm naming it this because that's the data from firebase
-  // Used to convert a a SnapShot into the corresponding model
+  // Used to convert a a SnapShot into the corresponding model This pulls the data from FireStore
+  // and sets the values for each variable
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
     _name = snapshot.data()[NAME];
     _email = snapshot.data()[EMAIL];
