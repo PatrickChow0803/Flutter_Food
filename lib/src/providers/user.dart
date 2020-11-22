@@ -78,6 +78,11 @@ class UserProvider with ChangeNotifier {
     cleanControllers();
   }
 
+  Future<void> reloadUserModel() async {
+    _userModel = await _userServices.getUserById(user.uid);
+    notifyListeners();
+  }
+
   Future<void> _onStateChanged(Firebase.User firebaseUser) async {
     if (firebaseUser == null) {
       _status = Status.Uninitialized;

@@ -101,6 +101,7 @@ class _DetailsState extends State<Details> {
                   onTap: () {
                     appProvider.changeLoading();
                     userProvider.addToCart(product: widget.product, quantity: quantity);
+                    userProvider.reloadUserModel();
                     _key.currentState.showSnackBar(SnackBar(
                         content: Text("Added $quantity ${widget.product.name} to the Cart!")));
                     appProvider.changeLoading();
