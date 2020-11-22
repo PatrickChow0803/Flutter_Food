@@ -15,7 +15,10 @@ class UserModel {
   String _email;
   String _id;
   String _stripeId;
+  int _priceSum = 0;
+
   List<CartItemModel> cart;
+  int totalCartPrice;
 
   String get name => _name;
   String get email => _email;
@@ -30,6 +33,16 @@ class UserModel {
     _id = snapshot.data()[ID];
     _stripeId = snapshot.data()[STRIPE_ID];
     cart = _convertCartItems(snapshot.data()[CART]) ?? [];
+    totalCartPrice = getTotalPrice(cart: snapshot.data()[CART]);
+  }
+
+  int getTotalPrice({List cart}) {
+    for (Map cartItem in cart) {
+      _priceSum += cartItem['price'] * cartItem['quantity'];
+    }
+    print("THE TOTAL IS: ${_priceSum}");
+
+    return _priceSum;
   }
 
   // Gets cart items as maps, and converting them to CartItemModels to be used in the application

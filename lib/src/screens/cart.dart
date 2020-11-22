@@ -94,6 +94,10 @@ class _CartScreenState extends State<CartScreen> {
           );
         },
       ),
+      bottomNavigationBar: Container(
+        height: 70,
+        child: Text("Total Price: ${userProvider.userModel.totalCartPrice.toString()}"),
+      ),
     );
   }
 }
