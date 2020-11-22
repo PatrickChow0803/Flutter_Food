@@ -47,8 +47,8 @@ class _CartScreenState extends State<CartScreen> {
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0)), //this right here
+                              shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                               child: Container(
                                 height: 200,
                                 child: Padding(
@@ -57,9 +57,11 @@ class _CartScreenState extends State<CartScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      CustomText(
-                                          text:
-                                              "You will be charged \$${userProvider.userModel.totalCartPrice} upon delivery"),
+                                      Center(
+                                        child: CustomText(
+                                            text:
+                                                "You will be charged \$${userProvider.userModel.totalCartPrice} upon delivery"),
+                                      ),
                                       SizedBox(
                                         width: 320.0,
                                         child: RaisedButton(
@@ -68,7 +70,7 @@ class _CartScreenState extends State<CartScreen> {
                                             "Accept",
                                             style: TextStyle(color: Colors.white),
                                           ),
-                                          color: Theme.of(context).primaryColor,
+                                          color: Colors.lightBlueAccent,
                                         ),
                                       ),
                                       SizedBox(

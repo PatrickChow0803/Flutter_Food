@@ -6,6 +6,7 @@ import 'package:flutter_food/src/providers/product.dart';
 import 'package:flutter_food/src/providers/restaurant.dart';
 import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/screens/category.dart';
+import 'package:flutter_food/src/screens/order_screen.dart';
 import 'package:flutter_food/src/screens/product_search.dart';
 import 'package:flutter_food/src/screens/restaurant.dart';
 import 'package:flutter_food/src/screens/restaurant_search.dart';
@@ -129,7 +130,9 @@ class _HomeState extends State<Home> {
                   title: CustomText(text: "Liked restaurants"),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    changeScreen(context, OrdersScreen());
+                  },
                   leading: Icon(Icons.bookmark_border),
                   title: CustomText(text: "Past orders"),
                 ),
