@@ -80,6 +80,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 status: "complete",
                                                 totalPrice: userProvider.userModel.totalCartPrice,
                                                 cart: userProvider.userModel.cart);
+                                            // EMPTY OUT THE CART WHEN THE USER PLACES THE ORDER
                                             for (CartItemModel cartItem
                                                 in userProvider.userModel.cart) {
                                               bool value = await userProvider.removeFromCart(

@@ -130,7 +130,8 @@ class _HomeState extends State<Home> {
                   title: CustomText(text: "Liked restaurants"),
                 ),
                 ListTile(
-                  onTap: () {
+                  onTap: () async {
+                    await userProvider.getOrders();
                     changeScreen(context, OrdersScreen());
                   },
                   leading: Icon(Icons.bookmark_border),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/src/helpers/style.dart';
+import 'package:flutter_food/src/models/order.dart';
 import 'package:flutter_food/src/providers/app.dart';
 import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
@@ -26,8 +27,19 @@ class OrdersScreen extends StatelessWidget {
       body: ListView.builder(
           itemCount: userProvider.orders.length,
           itemBuilder: (_, index) {
+            // loop through all of the user orders and create a ListTile for each order
+            OrderModel _order = userProvider.orders[index];
             return ListTile(
-              leading: CustomText(text: "H"),
+              leading: CustomText(
+                text: "\$${_order.total}",
+                weight: FontWeight.bold,
+              ),
+              title: Text(_order.description),
+              subtitle: Text(DateTime.fromMillisecondsSinceEpoch(_order.createdAt).toString()),
+              trailing: CustomText(
+                text: _order.status,
+                color: Colors.green,
+              ),
             );
           }),
     );

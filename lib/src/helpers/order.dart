@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_food/src/models/cart_item.dart';
 import 'package:flutter_food/src/models/order.dart';
 
 class OrderServices {
@@ -7,7 +8,20 @@ class OrderServices {
 
   // These keys are the fields that will be created in FireStore
   void createOrder(
-      {String userId, String id, String description, String status, List cart, int totalPrice}) {
+      {String userId,
+      String id,
+      String description,
+      String status,
+      List<CartItemModel> cart,
+      int totalPrice}) {
+//    List<Map> convertedCart = [];
+//    List<String> restaurantIds = [];
+
+//    for(CartItemModel item in cart){
+//      convertedCart.add(item.toMap());
+//      restaurantIds.add(item.restaurantId);
+//    }
+
     _firestore.collection(collection).doc(id).set({
       "userId": userId,
       "id": id,

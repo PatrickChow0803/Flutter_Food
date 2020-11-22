@@ -142,8 +142,6 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<bool> removeFromCart({CartItemModel cartItem}) async {
-    print("THE PRODUC IS: ${cartItem.toString()}");
-
     try {
       _userServices.removeFromCart(userId: _user.uid, cartItem: cartItem);
       return true;

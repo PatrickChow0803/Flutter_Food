@@ -17,7 +17,7 @@ class UserModel {
   String _stripeId;
   int _priceSum = 0;
 
-  List<CartItemModel> cart = [];
+  List cart;
   int totalCartPrice = 0;
 
   String get name => _name;
@@ -28,11 +28,13 @@ class UserModel {
   // .fromSnapshot can be anything I want. I'm naming it this because that's the data from firebase
   // Used to convert a a SnapShot into the corresponding model This pulls the data from FireStore
   // and sets the values for each variable
+  // used to getCart data
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
     _name = snapshot.data()[NAME];
     _email = snapshot.data()[EMAIL];
     _id = snapshot.data()[ID];
     _stripeId = snapshot.data()[STRIPE_ID];
+//    cart = snapshot.data()[CART] ?? [];
     cart = _convertCartItems(snapshot.data()[CART]) ?? [];
     totalCartPrice = getTotalPrice(cart: snapshot.data()[CART]) ?? 0;
   }
