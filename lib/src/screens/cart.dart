@@ -11,11 +11,14 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final _key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
 
     return Scaffold(
+      key: _key,
       backgroundColor: white,
       appBar: AppBar(
         iconTheme: IconThemeData(color: black),
@@ -70,7 +73,21 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                   ),
-                  IconButton(icon: Icon(Icons.delete), onPressed: () {})
+                  IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () async {
+                        bool value = await userProvider.removeFromCart(
+                            cartItem: userProvider.userModel.cart[index]);
+
+                        if (value) {
+                          _key.currentState
+                              .showSnackBar(SnackBar(content: Text("Removed from Cart!")));
+                          userProvider.reloadUserModel();
+                          return;
+                        } else {
+                          print("Item was not removed");
+                        }
+                      })
                 ],
               ),
             ),
