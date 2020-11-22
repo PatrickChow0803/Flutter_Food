@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart' as Firebase;
 import 'package:flutter/material.dart';
+import 'package:flutter_food/src/helpers/order.dart';
 import 'package:flutter_food/src/helpers/user_services.dart';
 import 'package:flutter_food/src/models/cart_item.dart';
+import 'package:flutter_food/src/models/order.dart';
 import 'package:flutter_food/src/models/product.dart';
 import 'package:flutter_food/src/models/user.dart';
 import 'package:uuid/uuid.dart';
@@ -18,11 +20,14 @@ class UserProvider with ChangeNotifier {
   Firebase.User _user;
   Status _status = Status.Uninitialized;
   UserServices _userServices = UserServices();
+  OrderServices _orderServices = OrderServices();
   UserModel _userModel;
   final formKey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  List<OrderModel> orders = [];
 
   Status get status => _status;
   UserModel get userModel => _userModel;
@@ -93,6 +98,10 @@ class UserProvider with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  getOrders() async {
+    orders = await _orderServices.getUserOrders(userId: _user.uid);
   }
 
   // Make this a bool to check to see if the method runs properly

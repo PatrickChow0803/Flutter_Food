@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_food/src/models/order.dart';
 
-class OrderService {
+class OrderServices {
   String collection = 'orders';
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
