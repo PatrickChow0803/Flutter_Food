@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_food/src/models/cart_item.dart';
 
 class UserModel {
   // THESE STATIC CONST VARIABLES ARE USED TO REPRESENT THE NAME OF THE FIELD IN FIRESTORE
@@ -8,11 +9,16 @@ class UserModel {
   static const EMAIL = 'email';
   static const ID = 'id';
   static const STRIPE_ID = "stripeId";
+  static const CART = "cart";
 
   String _name;
   String _email;
   String _id;
   String _stripeId;
+  int _priceSum = 0;
+
+  List<CartItemModel> cart;
+  int totalCartPrice;
 
   String get name => _name;
   String get email => _email;
@@ -26,5 +32,25 @@ class UserModel {
     _email = snapshot.data()[EMAIL];
     _id = snapshot.data()[ID];
     _stripeId = snapshot.data()[STRIPE_ID];
+    cart = _convertCartItems(snapshot.data()[CART]) ?? [];
+    totalCartPrice = getTotalPrice(cart: snapshot.data()[CART]);
+  }
+
+  int getTotalPrice({List cart}) {
+    for (Map cartItem in cart) {
+      _priceSum += cartItem['price'] * cartItem['quantity'];
+    }
+    print("THE TOTAL IS: ${_priceSum}");
+
+    return _priceSum;
+  }
+
+  // Gets cart items as maps, and converting them to CartItemModels to be used in the application
+  List<CartItemModel> _convertCartItems(List cart) {
+    List<CartItemModel> convertedCart = [];
+    for (Map cartItem in cart) {
+      convertedCart.add(CartItemModel.fromMap(cartItem));
+    }
+    return convertedCart;
   }
 }

@@ -17,7 +17,7 @@ import 'package:flutter_food/src/widgets/loading.dart';
 import 'package:flutter_food/src/widgets/restaurant.dart';
 import 'package:provider/provider.dart';
 import '../helpers/style.dart';
-import 'bag.dart';
+import 'cart.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                     IconButton(
                         icon: Icon(Icons.shopping_cart),
                         onPressed: () {
-                          changeScreen(context, ShoppingBag());
+                          changeScreen(context, CartScreen());
                         })
                   ],
                 ),
@@ -112,7 +112,9 @@ class _HomeState extends State<Home> {
                   title: CustomText(text: "Home"),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    changeScreen(context, CartScreen());
+                  },
                   leading: Icon(Icons.shopping_cart),
                   title: CustomText(text: "Cart"),
                 ),
