@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     final app = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -23,6 +23,13 @@ class OrdersScreen extends StatelessWidget {
             }),
       ),
       backgroundColor: white,
+      body: ListView.builder(
+          itemCount: userProvider.orders.length,
+          itemBuilder: (_, index) {
+            return ListTile(
+              leading: CustomText(text: "H"),
+            );
+          }),
     );
   }
 }

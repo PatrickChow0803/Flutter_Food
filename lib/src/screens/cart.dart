@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/src/helpers/order.dart';
 import 'package:flutter_food/src/helpers/style.dart';
+import 'package:flutter_food/src/models/cart_item.dart';
 import 'package:flutter_food/src/models/product.dart';
 import 'package:flutter_food/src/providers/user.dart';
 import 'package:flutter_food/src/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final _key = GlobalKey<ScaffoldState>();
+  OrderServices _orderServices = OrderServices();
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +68,33 @@ class _CartScreenState extends State<CartScreen> {
                                       ),
                                       SizedBox(
                                         width: 320.0,
+                                        // BUTTON FOR CONFIRMING THE ORDER
                                         child: RaisedButton(
-                                          onPressed: () {},
+                                          onPressed: () async {
+                                            var uuid = Uuid();
+                                            String orderId = uuid.v4();
+                                            _orderServices.createOrder(
+                                                userId: userProvider.user.uid,
+                                                id: orderId,
+                                                description: "Testing Description",
+                                                status: "complete",
+                                                totalPrice: userProvider.userModel.totalCartPrice,
+                                                cart: userProvider.userModel.cart);
+                                            for (CartItemModel cartItem
+                                                in userProvider.userModel.cart) {
+                                              bool value = await userProvider.removeFromCart(
+                                                  cartItem: cartItem);
+                                              if (value) {
+                                                userProvider.reloadUserModel();
+                                              }
+                                            }
+                                            _key.currentState.showSnackBar(
+                                                SnackBar(content: Text("Order Created!")));
+                                            // One to get rid of the alert dialog
+                                            Navigator.pop(context);
+                                            // This to go back to home screen
+                                            Navigator.pop(context);
+                                          },
                                           child: Text(
                                             "Accept",
                                             style: TextStyle(color: Colors.white),

@@ -18,7 +18,7 @@ class UserModel {
   int _priceSum = 0;
 
   List<CartItemModel> cart = [];
-  int totalCartPrice;
+  int totalCartPrice = 0;
 
   String get name => _name;
   String get email => _email;
@@ -34,7 +34,7 @@ class UserModel {
     _id = snapshot.data()[ID];
     _stripeId = snapshot.data()[STRIPE_ID];
     cart = _convertCartItems(snapshot.data()[CART]) ?? [];
-    totalCartPrice = getTotalPrice(cart: snapshot.data()[CART]);
+    totalCartPrice = getTotalPrice(cart: snapshot.data()[CART]) ?? 0;
   }
 
   int getTotalPrice({List cart}) {
