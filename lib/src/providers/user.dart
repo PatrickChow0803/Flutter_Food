@@ -132,6 +132,18 @@ class UserProvider with ChangeNotifier {
     return true;
   }
 
+  Future<bool> removeFromCart({CartItemModel cartItem}) async {
+    print("THE PRODUC IS: ${cartItem.toString()}");
+
+    try {
+      _userServices.removeFromCart(userId: _user.uid, cartItem: cartItem);
+      return true;
+    } catch (e) {
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+  }
+
   // General methods
 
   bool _onError(String error) {
